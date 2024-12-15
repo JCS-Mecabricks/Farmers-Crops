@@ -1,13 +1,12 @@
 package github.jcsmecabricks.customcrops.datagen;
 
 import github.jcsmecabricks.customcrops.block.ModBlocks;
-import github.jcsmecabricks.customcrops.block.custom.GrapeBushBlock;
+import github.jcsmecabricks.customcrops.block.custom.BlueberryBushBlock;
 import github.jcsmecabricks.customcrops.item.ModItems;
 import net.fabricmc.fabric.api.datagen.v1.FabricDataOutput;
 import net.fabricmc.fabric.api.datagen.v1.provider.FabricBlockLootTableProvider;
 import net.minecraft.enchantment.Enchantment;
 import net.minecraft.enchantment.Enchantments;
-import net.minecraft.item.Item;
 import net.minecraft.loot.LootPool;
 import net.minecraft.loot.LootTable;
 import net.minecraft.loot.condition.BlockStatePropertyLootCondition;
@@ -29,17 +28,17 @@ public class ModLootTableProvider extends FabricBlockLootTableProvider {
 
     @Override
     public void generate() {
-        this.addDrop(ModBlocks.GRAPE_BUSH,
+        this.addDrop(ModBlocks.BLUEBERRY_BUSH,
                 block -> this.applyExplosionDecay(
                         block, LootTable.builder().pool(LootPool.builder().conditionally(
-                                                BlockStatePropertyLootCondition.builder(ModBlocks.GRAPE_BUSH).properties(StatePredicate.Builder.create().exactMatch(GrapeBushBlock.AGE, 3))
+                                                BlockStatePropertyLootCondition.builder(ModBlocks.BLUEBERRY_BUSH).properties(StatePredicate.Builder.create().exactMatch(BlueberryBushBlock.AGE, 3))
                                         )
-                                        .with(ItemEntry.builder(ModItems.GRAPES))
+                                        .with(ItemEntry.builder(ModItems.BLUEBERRIES))
                                         .apply(SetCountLootFunction.builder(UniformLootNumberProvider.create(2.0F, 3.0F)))
                                         .apply(ApplyBonusLootFunction.uniformBonusCount(impl.getOrThrow(Enchantments.FORTUNE)))
                         ).pool(LootPool.builder().conditionally(
-                                        BlockStatePropertyLootCondition.builder(ModBlocks.GRAPE_BUSH).properties(StatePredicate.Builder.create().exactMatch(GrapeBushBlock.AGE, 2))
-                                ).with(ItemEntry.builder(ModItems.GRAPES))
+                                        BlockStatePropertyLootCondition.builder(ModBlocks.BLUEBERRY_BUSH).properties(StatePredicate.Builder.create().exactMatch(BlueberryBushBlock.AGE, 2))
+                                ).with(ItemEntry.builder(ModItems.BLUEBERRIES))
                                 .apply(SetCountLootFunction.builder(UniformLootNumberProvider.create(1.0F, 2.0F)))
                                 .apply(ApplyBonusLootFunction.uniformBonusCount(impl.getOrThrow(Enchantments.FORTUNE))))));
 

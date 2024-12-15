@@ -7,17 +7,14 @@ import net.minecraft.item.ItemGroup;
 import net.minecraft.registry.Registries;
 import net.minecraft.registry.Registry;
 import net.minecraft.text.Text;
-import net.minecraft.util.Identifier;
-
-import java.util.Optional;
 
 public class ModGroups {
     public static final Text FARMERS_CROPS_TITLE = Text.translatable("itemGroup." + CustomCrops.MOD_ID + ".farmers_crops_group");
     public static final ItemGroup CUSTOMWEAPONS_GROUP = register("farmers_crops_group", FabricItemGroup.builder()
             .displayName(FARMERS_CROPS_TITLE)
-            .icon(ModItems.GRAPES::getDefaultStack)
+            .icon(ModItems.BLUEBERRIES::getDefaultStack)
             .entries((displayContext, entries) -> {
-                entries.add(ModItems.GRAPES);
+                entries.add(ModItems.BLUEBERRIES);
 }).build());
     public static <T extends ItemGroup> T register(String name, T itemGroup) {
         return Registry.register(Registries.ITEM_GROUP, CustomCrops.id(name), itemGroup);

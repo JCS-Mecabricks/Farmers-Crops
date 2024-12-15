@@ -19,8 +19,8 @@ public class CustomCrops implements ModInitializer {
 		ModBlocks.load();
 		ModItems.load();
 		ModGroups.load();
-		LOGGER.info("Hello Fabric world!");
-		CompostingChanceRegistry.INSTANCE.add(ModItems.GRAPES, 0.15f);
+		LOGGER.info("Loading...");
+		CompostingChanceRegistry.INSTANCE.add(ModItems.BLUEBERRIES, 0.15f);
 	}
 	public static Identifier id(String path) {
 		return Identifier.of(MOD_ID, path);

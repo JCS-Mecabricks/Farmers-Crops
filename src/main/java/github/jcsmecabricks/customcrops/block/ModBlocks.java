@@ -1,7 +1,7 @@
 package github.jcsmecabricks.customcrops.block;
 
 import github.jcsmecabricks.customcrops.CustomCrops;
-import github.jcsmecabricks.customcrops.block.custom.GrapeBushBlock;
+import github.jcsmecabricks.customcrops.block.custom.BlueberryBushBlock;
 import net.minecraft.block.AbstractBlock;
 import net.minecraft.block.Block;
 import net.minecraft.block.Blocks;
@@ -14,9 +14,9 @@ import net.minecraft.registry.RegistryKeys;
 import net.minecraft.util.Identifier;
 
 public class ModBlocks {
-    public static final Block GRAPE_BUSH = registerBlock("grape_bush",
-            new GrapeBushBlock(AbstractBlock.Settings.copy(Blocks.SWEET_BERRY_BUSH)
-                    .registryKey(RegistryKey.of(RegistryKeys.BLOCK, Identifier.of(CustomCrops.MOD_ID, "grape_bush")))));
+    public static final Block BLUEBERRY_BUSH = registerBlock("blueberry_bush",
+            new BlueberryBushBlock(AbstractBlock.Settings.copy(Blocks.SWEET_BERRY_BUSH)
+                    .registryKey(RegistryKey.of(RegistryKeys.BLOCK, Identifier.of(CustomCrops.MOD_ID, "blueberry_bush")))));
 
 
     public static <T extends Block> T register(String name, T block) {

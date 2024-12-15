@@ -12,10 +12,10 @@ import net.minecraft.util.Identifier;
 
 public class ModItems {
 
-    public static final Item GRAPES = register("grapes",
-            new BlockItem(ModBlocks.GRAPE_BUSH, new Item.Settings()
+    public static final Item BLUEBERRIES = register("blueberries",
+            new BlockItem(ModBlocks.BLUEBERRY_BUSH, new Item.Settings()
                     .food(ModFoodComponents.GRAPE)
-        .registryKey(RegistryKey.of(RegistryKeys.ITEM, Identifier.of(CustomCrops.MOD_ID, "grapes")))));
+        .registryKey(RegistryKey.of(RegistryKeys.ITEM, Identifier.of(CustomCrops.MOD_ID, "blueberries")))));
 
 
     public static <T extends Item> T register(String name, T item) {

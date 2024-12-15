@@ -1,0 +1,9 @@
+// 1.21.4	-999999999-01-01T00:00:00	Custom Crops/Model Definitions
+92925d2235ee54ed4260a1c018ab778273cff8ed assets/custom-crops/blockstates/blueberry_bush.json
+ae78b457309ddd965e56d0c2ff13036af5f98090 assets/custom-crops/items/blueberries.json
+7e3b604d6df526ecda30c8a301e2e3c818663859 assets/custom-crops/items/blueberry_bush.json
+12a0d29fe8fba49b9eda2375bb7f4aff42563b70 assets/custom-crops/models/block/blueberry_bush_stage0.json
+e1c327a89fb1ecd321241992a659390ed05bb103 assets/custom-crops/models/block/blueberry_bush_stage1.json
+d3366e95f7913e451ae9ec495f2393582e52509e assets/custom-crops/models/block/blueberry_bush_stage2.json
+ee86b0452b7396008659386dc95e7922a3fd963a assets/custom-crops/models/block/blueberry_bush_stage3.json
+aa6e1f85c5e8c35339008c6babbe923093dfa283 assets/custom-crops/models/item/blueberries.json
