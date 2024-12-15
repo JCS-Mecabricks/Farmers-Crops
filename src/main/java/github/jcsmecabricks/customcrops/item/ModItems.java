@@ -14,8 +14,14 @@ public class ModItems {
 
     public static final Item BLUEBERRIES = register("blueberries",
             new BlockItem(ModBlocks.BLUEBERRY_BUSH, new Item.Settings()
-                    .food(ModFoodComponents.GRAPE)
+                    .food(ModFoodComponents.BLUEBERRY)
         .registryKey(RegistryKey.of(RegistryKeys.ITEM, Identifier.of(CustomCrops.MOD_ID, "blueberries")))));
+
+
+    public static final Item STRAWBERRIES = register("strawberries",
+            new BlockItem(ModBlocks.STRAWBERRY_BUSH, new Item.Settings()
+                    .food(ModFoodComponents.STRAWBERRY)
+                    .registryKey(RegistryKey.of(RegistryKeys.ITEM, Identifier.of(CustomCrops.MOD_ID, "strawberries")))));
 
 
     public static <T extends Item> T register(String name, T item) {

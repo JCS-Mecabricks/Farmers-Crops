@@ -10,7 +10,7 @@ import net.minecraft.text.Text;
 
 public class ModGroups {
     public static final Text FARMERS_CROPS_TITLE = Text.translatable("itemGroup." + CustomCrops.MOD_ID + ".farmers_crops_group");
-    public static final ItemGroup CUSTOMWEAPONS_GROUP = register("farmers_crops_group", FabricItemGroup.builder()
+    public static final ItemGroup FARMERS_CROPS_GROUP = register("farmers_crops_group", FabricItemGroup.builder()
             .displayName(FARMERS_CROPS_TITLE)
             .icon(ModItems.BLUEBERRIES::getDefaultStack)
             .entries((displayContext, entries) -> {
