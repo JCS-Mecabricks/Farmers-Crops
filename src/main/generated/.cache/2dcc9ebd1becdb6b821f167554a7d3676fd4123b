@@ -1,3 +1,5 @@
 // 1.21.4	-999999999-01-01T00:00:00	Custom Crops/World Generator
 7bab0e619a995361573cce65c6effc813b499d3c data/custom-crops/worldgen/configured_feature/blueberry_bush.json
-7e8febcefefcfc0ae1f10f47e75e083e0268ea88 data/custom-crops/worldgen/placed_feature/blueberry_bush_placed.json
+921fa47ec6bc3ef000173f23f3dc79580ddb738f data/custom-crops/worldgen/configured_feature/strawberry_bush.json
+0d959a718ffe7f6843a165a7ad3cf29b77031734 data/custom-crops/worldgen/placed_feature/blueberry_bush_placed.json
+989e00c8e714607c25a13d2163eb38d1455a4b39 data/custom-crops/worldgen/placed_feature/strawberry_bush_placed.json

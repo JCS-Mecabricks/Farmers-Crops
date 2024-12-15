@@ -23,6 +23,7 @@ public class CustomCrops implements ModInitializer {
 		ModWorldGeneration.generateModWorldGen();
 		LOGGER.info("Loading...");
 		CompostingChanceRegistry.INSTANCE.add(ModItems.BLUEBERRIES, 0.15f);
+		CompostingChanceRegistry.INSTANCE.add(ModItems.BLUEBERRIES, 0.15f);
 	}
 	public static Identifier id(String path) {
 		return Identifier.of(MOD_ID, path);
