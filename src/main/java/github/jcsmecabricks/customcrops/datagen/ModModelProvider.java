@@ -14,7 +14,7 @@ public class ModModelProvider extends FabricModelProvider {
 
     @Override
     public void generateBlockStateModels(BlockStateModelGenerator blockStateModelGenerator) {
-        blockStateModelGenerator.registerCrop(ModBlocks.GRAPE_BUSH, GrapeBushBlock.AGE, 0, 1, 2, 3, 4, 5, 6);
+        blockStateModelGenerator.registerSimpleCubeAll(ModBlocks.GRAPE_BUSH);
         blockStateModelGenerator.registerTintableCrossBlockStateWithStages(ModBlocks.GRAPE_BUSH, BlockStateModelGenerator.CrossType.NOT_TINTED,
                 GrapeBushBlock.AGE, 0, 1, 2, 3);
     }

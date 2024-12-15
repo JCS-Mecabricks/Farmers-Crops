@@ -5,6 +5,7 @@ import github.jcsmecabricks.customcrops.group.ModGroups;
 import github.jcsmecabricks.customcrops.item.ModItems;
 import net.fabricmc.api.ModInitializer;
 
+import net.fabricmc.fabric.api.registry.CompostingChanceRegistry;
 import net.minecraft.util.Identifier;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -19,6 +20,7 @@ public class CustomCrops implements ModInitializer {
 		ModItems.load();
 		ModGroups.load();
 		LOGGER.info("Hello Fabric world!");
+		CompostingChanceRegistry.INSTANCE.add(ModItems.GRAPES, 0.15f);
 	}
 	public static Identifier id(String path) {
 		return Identifier.of(MOD_ID, path);

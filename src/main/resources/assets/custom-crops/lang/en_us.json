@@ -1,4 +1,5 @@
 {
-  "block.custom-crops.grape_bush": "Grape Bush",
-  "item.custom-crops.grapes": "Grapes"
+  "item.custom-crops.grape_bush": "Grape Bush",
+  "item.custom-crops.grapes": "Grapes",
+  "itemGroup.custom-crops.farmers_crops_group": "Farmers Crops"
 }
