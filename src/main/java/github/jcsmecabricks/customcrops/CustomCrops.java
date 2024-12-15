@@ -3,6 +3,7 @@ package github.jcsmecabricks.customcrops;
 import github.jcsmecabricks.customcrops.block.ModBlocks;
 import github.jcsmecabricks.customcrops.group.ModGroups;
 import github.jcsmecabricks.customcrops.item.ModItems;
+import github.jcsmecabricks.customcrops.world.gen.ModWorldGeneration;
 import net.fabricmc.api.ModInitializer;
 
 import net.fabricmc.fabric.api.registry.CompostingChanceRegistry;
@@ -19,6 +20,7 @@ public class CustomCrops implements ModInitializer {
 		ModBlocks.load();
 		ModItems.load();
 		ModGroups.load();
+		ModWorldGeneration.generateModWorldGen();
 		LOGGER.info("Loading...");
 		CompostingChanceRegistry.INSTANCE.add(ModItems.BLUEBERRIES, 0.15f);
 	}
