@@ -1,0 +1,40 @@
+{
+	"schemaVersion": 1,
+	"id": "custom-crops",
+	"version": "${version}",
+	"name": "Custom Crops",
+	"description": "This adds more crops and bushes to minecraft!",
+	"authors": [
+		"JCS"
+	],
+	"contact": {
+		"homepage": "",
+		"sources": ""
+	},
+	"license": "CC0-1.0",
+	"icon": "assets/custom-crops/icon.png",
+	"environment": "*",
+	"entrypoints": {
+		"main": [
+			"github.jcsmecabricks.customcrops.CustomCrops"
+		],
+		"fabric-datagen": [
+			"github.jcsmecabricks.customcrops.CustomCropsDataGenerator"
+		],
+		"client": [
+			"github.jcsmecabricks.customcrops.CustomCropsClient"
+		]
+	},
+	"mixins": [
+		"custom-crops.mixins.json"
+	],
+	"depends": {
+		"fabricloader": ">=0.16.9",
+		"minecraft": "~1.21.4",
+		"java": ">=21",
+		"fabric-api": "*"
+	},
+	"suggests": {
+		"another-mod": "*"
+	}
+}
