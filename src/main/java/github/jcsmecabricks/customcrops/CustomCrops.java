@@ -1,6 +1,8 @@
 package github.jcsmecabricks.customcrops;
 
 import github.jcsmecabricks.customcrops.block.ModBlocks;
+import github.jcsmecabricks.customcrops.group.ModGroups;
+import github.jcsmecabricks.customcrops.item.ModItems;
 import net.fabricmc.api.ModInitializer;
 
 import net.minecraft.util.Identifier;
@@ -14,6 +16,8 @@ public class CustomCrops implements ModInitializer {
 	@Override
 	public void onInitialize() {
 		ModBlocks.load();
+		ModItems.load();
+		ModGroups.load();
 		LOGGER.info("Hello Fabric world!");
 	}
 	public static Identifier id(String path) {

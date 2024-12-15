@@ -14,6 +14,7 @@ public class ModItems {
 
     public static final Item GRAPES = register("grapes",
             new BlockItem(ModBlocks.GRAPE_BUSH, new Item.Settings()
+                    .food(ModFoodComponents.GRAPE)
         .registryKey(RegistryKey.of(RegistryKeys.ITEM, Identifier.of(CustomCrops.MOD_ID, "grapes")))));
 
 
