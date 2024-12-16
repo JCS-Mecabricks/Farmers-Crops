@@ -12,4 +12,9 @@ public class ModFoodComponents {
             .nutrition(5)
             .saturationModifier(0.25f)
             .build();
+
+    public static final FoodComponent BLACKBERRY = new FoodComponent.Builder()
+            .nutrition(6)
+            .saturationModifier(0.3f)
+            .build();
 }

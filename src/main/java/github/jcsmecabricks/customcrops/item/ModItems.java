@@ -23,6 +23,11 @@ public class ModItems {
                     .food(ModFoodComponents.STRAWBERRY)
                     .registryKey(RegistryKey.of(RegistryKeys.ITEM, Identifier.of(CustomCrops.MOD_ID, "strawberries")))));
 
+    public static final Item BLACKBERRIES = register("blackberries",
+            new BlockItem(ModBlocks.BLACKBERRY_BUSH, new Item.Settings()
+                    .food(ModFoodComponents.BLACKBERRY)
+                    .registryKey(RegistryKey.of(RegistryKeys.ITEM, Identifier.of(CustomCrops.MOD_ID, "blackberries")))));
+
 
     public static <T extends Item> T register(String name, T item) {
         return Registry.register(Registries.ITEM, CustomCrops.id(name), item);

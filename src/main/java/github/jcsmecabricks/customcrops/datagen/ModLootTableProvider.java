@@ -1,6 +1,7 @@
 package github.jcsmecabricks.customcrops.datagen;
 
 import github.jcsmecabricks.customcrops.block.ModBlocks;
+import github.jcsmecabricks.customcrops.block.custom.BlackberryBushBlock;
 import github.jcsmecabricks.customcrops.block.custom.BlueberryBushBlock;
 import github.jcsmecabricks.customcrops.block.custom.StrawberryBushBlock;
 import github.jcsmecabricks.customcrops.item.ModItems;
@@ -54,6 +55,20 @@ public class ModLootTableProvider extends FabricBlockLootTableProvider {
                         ).pool(LootPool.builder().conditionally(
                                         BlockStatePropertyLootCondition.builder(ModBlocks.STRAWBERRY_BUSH).properties(StatePredicate.Builder.create().exactMatch(StrawberryBushBlock.AGE, 2))
                                 ).with(ItemEntry.builder(ModItems.STRAWBERRIES))
+                                .apply(SetCountLootFunction.builder(UniformLootNumberProvider.create(1.0F, 2.0F)))
+                                .apply(ApplyBonusLootFunction.uniformBonusCount(impl.getOrThrow(Enchantments.FORTUNE))))));
+
+        this.addDrop(ModBlocks.BLACKBERRY_BUSH,
+                block -> this.applyExplosionDecay(
+                        block, LootTable.builder().pool(LootPool.builder().conditionally(
+                                                BlockStatePropertyLootCondition.builder(ModBlocks.BLACKBERRY_BUSH).properties(StatePredicate.Builder.create().exactMatch(BlackberryBushBlock.AGE, 3))
+                                        )
+                                        .with(ItemEntry.builder(ModItems.BLACKBERRIES))
+                                        .apply(SetCountLootFunction.builder(UniformLootNumberProvider.create(2.0F, 3.0F)))
+                                        .apply(ApplyBonusLootFunction.uniformBonusCount(impl.getOrThrow(Enchantments.FORTUNE)))
+                        ).pool(LootPool.builder().conditionally(
+                                        BlockStatePropertyLootCondition.builder(ModBlocks.BLACKBERRY_BUSH).properties(StatePredicate.Builder.create().exactMatch(BlackberryBushBlock.AGE, 2))
+                                ).with(ItemEntry.builder(ModItems.BLACKBERRIES))
                                 .apply(SetCountLootFunction.builder(UniformLootNumberProvider.create(1.0F, 2.0F)))
                                 .apply(ApplyBonusLootFunction.uniformBonusCount(impl.getOrThrow(Enchantments.FORTUNE))))));
 

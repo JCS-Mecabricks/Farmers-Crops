@@ -1,0 +1,6 @@
+{
+  "parent": "minecraft:block/cross",
+  "textures": {
+    "cross": "custom-crops:block/blackberry_bush_stage2"
+  }
+}

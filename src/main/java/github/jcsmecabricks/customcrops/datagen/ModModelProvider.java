@@ -1,6 +1,7 @@
 package github.jcsmecabricks.customcrops.datagen;
 
 import github.jcsmecabricks.customcrops.block.ModBlocks;
+import github.jcsmecabricks.customcrops.block.custom.BlackberryBushBlock;
 import github.jcsmecabricks.customcrops.block.custom.BlueberryBushBlock;
 import github.jcsmecabricks.customcrops.block.custom.StrawberryBushBlock;
 import net.fabricmc.fabric.api.client.datagen.v1.provider.FabricModelProvider;
@@ -19,6 +20,8 @@ public class ModModelProvider extends FabricModelProvider {
                 BlueberryBushBlock.AGE, 0, 1, 2, 3);
         blockStateModelGenerator.registerTintableCrossBlockStateWithStages(ModBlocks.STRAWBERRY_BUSH, BlockStateModelGenerator.CrossType.NOT_TINTED,
                 StrawberryBushBlock.AGE, 0, 1, 2, 3);
+        blockStateModelGenerator.registerTintableCrossBlockStateWithStages(ModBlocks.BLACKBERRY_BUSH, BlockStateModelGenerator.CrossType.NOT_TINTED,
+                BlackberryBushBlock.AGE, 0, 1, 2, 3);
     }
 
     @Override

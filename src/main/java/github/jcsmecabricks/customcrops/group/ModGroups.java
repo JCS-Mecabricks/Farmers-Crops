@@ -16,6 +16,7 @@ public class ModGroups {
             .entries((displayContext, entries) -> {
                 entries.add(ModItems.BLUEBERRIES);
                 entries.add(ModItems.STRAWBERRIES);
+                entries.add(ModItems.BLACKBERRIES);
 }).build());
     public static <T extends ItemGroup> T register(String name, T itemGroup) {
         return Registry.register(Registries.ITEM_GROUP, CustomCrops.id(name), itemGroup);
