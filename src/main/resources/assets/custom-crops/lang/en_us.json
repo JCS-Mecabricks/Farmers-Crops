@@ -2,5 +2,7 @@
   "item.custom-crops.blueberries": "Blueberries",
   "item.custom-crops.blackberries": "Blackberries",
   "item.custom-crops.strawberries": "Strawberries",
+  "block.custom-crops.pastry_block": "Pastry Block",
+  "gui.custom-crops.pastry_station": "Pastry Station",
   "itemGroup.custom-crops.farmers_crops_group": "Farmers Crops"
 }

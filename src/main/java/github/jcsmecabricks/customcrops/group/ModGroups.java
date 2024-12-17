@@ -1,6 +1,7 @@
 package github.jcsmecabricks.customcrops.group;
 
 import github.jcsmecabricks.customcrops.CustomCrops;
+import github.jcsmecabricks.customcrops.block.ModBlocks;
 import github.jcsmecabricks.customcrops.item.ModItems;
 import net.fabricmc.fabric.api.itemgroup.v1.FabricItemGroup;
 import net.minecraft.item.ItemGroup;
@@ -17,6 +18,7 @@ public class ModGroups {
                 entries.add(ModItems.BLUEBERRIES);
                 entries.add(ModItems.STRAWBERRIES);
                 entries.add(ModItems.BLACKBERRIES);
+                entries.add(ModBlocks.PASTRY_STATION);
 }).build());
     public static <T extends ItemGroup> T register(String name, T itemGroup) {
         return Registry.register(Registries.ITEM_GROUP, CustomCrops.id(name), itemGroup);

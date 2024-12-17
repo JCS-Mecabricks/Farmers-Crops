@@ -1,6 +1,12 @@
 package github.jcsmecabricks.customcrops.item;
 
+import net.minecraft.component.type.ConsumableComponent;
 import net.minecraft.component.type.FoodComponent;
+import net.minecraft.entity.effect.StatusEffectInstance;
+import net.minecraft.item.consume.ApplyEffectsConsumeEffect;
+import net.minecraft.sound.SoundEvents;
+
+import static net.minecraft.component.type.ConsumableComponents.drink;
 
 public class ModFoodComponents {
     public static final FoodComponent BLUEBERRY = new FoodComponent.Builder()
@@ -16,5 +22,15 @@ public class ModFoodComponents {
     public static final FoodComponent BLACKBERRY = new FoodComponent.Builder()
             .nutrition(6)
             .saturationModifier(0.3f)
+            .build();
+
+    public static final ConsumableComponent STRAWBERRY_LEMONADE = drink()
+            .consumeSeconds(2.0F)
+            .sound(SoundEvents.ENTITY_GENERIC_DRINK)
+            .build();
+
+    public static final FoodComponent STRAWBERRY_LEMONADE_FOOD = new FoodComponent.Builder()
+            .nutrition(7)
+            .saturationModifier(0.5f)
             .build();
 }
