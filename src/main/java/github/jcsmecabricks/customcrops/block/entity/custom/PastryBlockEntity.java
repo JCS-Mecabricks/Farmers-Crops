@@ -3,6 +3,7 @@ package github.jcsmecabricks.customcrops.block.entity.custom;
 import github.jcsmecabricks.customcrops.block.entity.ImplementedInventory;
 import github.jcsmecabricks.customcrops.block.entity.ModBlockEntities;
 import github.jcsmecabricks.customcrops.item.ModItems;
+import github.jcsmecabricks.customcrops.screen.custom.PastryScreenHandler;
 import net.fabricmc.fabric.api.screenhandler.v1.ExtendedScreenHandlerFactory;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.entity.BlockEntity;
@@ -30,10 +31,8 @@ import java.util.Optional;
 public class PastryBlockEntity extends BlockEntity implements ExtendedScreenHandlerFactory<BlockPos>, ImplementedInventory {
     private final DefaultedList<ItemStack> inventory = DefaultedList.ofSize(4, ItemStack.EMPTY);
 
-    private static final int FLUID_ITEM_SLOT = 0;
     private static final int INPUT_SLOT = 1;
     private static final int OUTPUT_SLOT = 2;
-    private static final int ENERGY_ITEM_SLOT = 3;
 
     protected final PropertyDelegate propertyDelegate;
     private int progress = 0;
@@ -86,7 +85,7 @@ public class PastryBlockEntity extends BlockEntity implements ExtendedScreenHand
     @Nullable
     @Override
     public ScreenHandler createMenu(int syncId, PlayerInventory playerInventory, PlayerEntity player) {
-        return new pastry_stationScreenHandler(syncId, playerInventory, this, propertyDelegate);
+        return new PastryScreenHandler(syncId, playerInventory, this, propertyDelegate);
     }
 
     @Override
@@ -110,20 +109,11 @@ public class PastryBlockEntity extends BlockEntity implements ExtendedScreenHand
             return;
         }
 
-        if(hasRecipe() && canInsertIntoOutputSlot()) {
-            increaseCraftingProgress();
-            world.setBlockState(pos, state.with(pastry_stationBlock.LIT, true));
-            markDirty(world, pos, state);
-
-            if(hasCraftingFinished()) {
+            if (hasCraftingFinished()) {
                 craftItem();
                 resetProgress();
             }
-        } else {
-            world.setBlockState(pos, state.with(pastry_stationBlock.LIT, false));
-            resetProgress();
         }
-    }
 
     private void resetProgress() {
         this.progress = 0;
@@ -156,12 +146,7 @@ public class PastryBlockEntity extends BlockEntity implements ExtendedScreenHand
         ItemStack output = new ItemStack(ModItems.STRAWBERRY_LEMONADE);
 
         return this.getStack(INPUT_SLOT).getItem() == input.getItem() &&
-                canInsertAmountIntoOutputSlot(output.getCount()) && canInsertItemIntoOutputSlot()
-    }
-
-    private Optional<RecipeEntry<pastry_stationRecipe>> getCurrentRecipe() {
-        return this.getWorld().getRecipeManager()
-                .getFirstMatch(ModRecipes.pastry_station_TYPE, new pastry_stationRecipeInput(inventory.get(INPUT_SLOT)), this.getWorld());
+                canInsertAmountIntoOutputSlot(output.getCount()) && canInsertItemIntoOutputSlot(output);
     }
 
     private boolean canInsertItemIntoOutputSlot(ItemStack output) {
