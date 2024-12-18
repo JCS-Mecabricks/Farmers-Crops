@@ -4,6 +4,7 @@ import github.jcsmecabricks.customcrops.CustomCrops;
 import github.jcsmecabricks.customcrops.block.ModBlocks;
 import net.minecraft.item.BlockItem;
 import net.minecraft.item.Item;
+import net.minecraft.item.Items;
 import net.minecraft.registry.Registries;
 import net.minecraft.registry.Registry;
 import net.minecraft.registry.RegistryKey;
@@ -26,6 +27,7 @@ public class ModItems {
     public static final Item BLACKBERRIES = register("blackberries",
             new BlockItem(ModBlocks.BLACKBERRY_BUSH, new Item.Settings()
                     .food(ModFoodComponents.BLACKBERRY)
+                    .useRemainder(Items.GLASS_BOTTLE)
                     .registryKey(RegistryKey.of(RegistryKeys.ITEM, Identifier.of(CustomCrops.MOD_ID, "blackberries")))));
 
     public static final Item STRAWBERRY_LEMONADE = register("strawberry_lemonade",

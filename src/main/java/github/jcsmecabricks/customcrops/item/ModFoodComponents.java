@@ -31,6 +31,7 @@ public class ModFoodComponents {
 
     public static final FoodComponent STRAWBERRY_LEMONADE_FOOD = new FoodComponent.Builder()
             .nutrition(7)
-            .saturationModifier(0.5f)
+            .alwaysEdible()
+            .saturationModifier(0.50f)
             .build();
 }

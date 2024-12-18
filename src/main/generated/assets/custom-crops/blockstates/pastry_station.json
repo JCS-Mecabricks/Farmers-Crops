@@ -1,7 +1,19 @@
 {
   "variants": {
-    "": {
+    "facing=east": {
+      "model": "custom-crops:block/pastry_station",
+      "y": 90
+    },
+    "facing=north": {
       "model": "custom-crops:block/pastry_station"
+    },
+    "facing=south": {
+      "model": "custom-crops:block/pastry_station",
+      "y": 180
+    },
+    "facing=west": {
+      "model": "custom-crops:block/pastry_station",
+      "y": 270
     }
   }
 }
