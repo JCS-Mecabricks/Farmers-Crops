@@ -14,8 +14,8 @@ public class PastryScreen extends HandledScreen<PastryScreenHandler> {
             Identifier.of(CustomCrops.MOD_ID, "textures/gui/pastry_station/pastry_station_gui.png");
     private static final Identifier ARROW_TEXTURE =
             Identifier.of(CustomCrops.MOD_ID, "textures/gui/pastry_station/arrow_progress.png");
-    private static final Identifier CRYSTAL_TEXTURE =
-            Identifier.of(CustomCrops.MOD_ID, "textures/gui/pastry_station/crystal_progress.png");
+    private static final Identifier FIRE_TEXTURE =
+            Identifier.of("textures/gui/sprites/container/furnace/lit_progress");
 
     public PastryScreen(PastryScreenHandler handler, PlayerInventory inventory, Text title) {
         super(handler, inventory, title);
@@ -35,6 +35,14 @@ public class PastryScreen extends HandledScreen<PastryScreenHandler> {
         int y = (height - backgroundHeight) / 2;
         context.drawTexture(RenderLayer::getGuiTextured, GUI_TEXTURE, x, y, 0.0F, 0.0F, this.backgroundWidth, this.backgroundHeight, 256, 256);
         renderProgressArrow(context, x, y);
+        renderProgressFire(context, x, y);
+    }
+
+    private void renderProgressFire(DrawContext context, int x, int y) {
+        if(handler.isCrafting()) {
+            context.drawTexture(RenderLayer::getGuiTextured, FIRE_TEXTURE,x + 104, y + 13 + 16 - handler.getScaledBurnProgress(), 0,
+                    16 - handler.getScaledBurnProgress(), 16, handler.getScaledBurnProgress(),16, 16);
+        }
     }
 
 

@@ -46,17 +46,17 @@ public class PastryScreenHandler extends ScreenHandler {
     public int getScaledArrowProgress() {
         int progress = this.propertyDelegate.get(0);
         int maxProgress = this.propertyDelegate.get(1); // Max Progress
-        int arrowPixelSize = 24; // This is the width in pixels of your arrow
+        int arrowPixelSize = 24;
 
         return maxProgress != 0 && progress != 0 ? progress * arrowPixelSize / maxProgress : 0;
     }
 
-    public int getScaledPastryProgress() {
+    public int getScaledBurnProgress() {
         int progress = this.propertyDelegate.get(0);
         int maxProgress = this.propertyDelegate.get(1); // Max Progress
-        int pastryPixelSize = 16; // This is the width in pixels of your arrow
+        int crystalPixelSize = 16; // This is the width in pixels of your arrow
 
-        return maxProgress != 0 && progress != 0 ? progress * pastryPixelSize / maxProgress : 0;
+        return maxProgress != 0 && progress != 0 ? progress * crystalPixelSize / maxProgress : 0;
     }
 
     @Override

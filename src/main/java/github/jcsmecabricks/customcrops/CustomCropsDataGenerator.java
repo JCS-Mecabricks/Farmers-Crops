@@ -1,5 +1,6 @@
 package github.jcsmecabricks.customcrops;
 
+import github.jcsmecabricks.customcrops.datagen.ModBlockTags;
 import github.jcsmecabricks.customcrops.datagen.ModLootTableProvider;
 import github.jcsmecabricks.customcrops.datagen.ModModelProvider;
 import github.jcsmecabricks.customcrops.datagen.ModWorldGenerator;
@@ -15,6 +16,7 @@ public class CustomCropsDataGenerator implements DataGeneratorEntrypoint {
 	public void onInitializeDataGenerator(FabricDataGenerator fabricDataGenerator) {
 		FabricDataGenerator.Pack pack = fabricDataGenerator.createPack();
 		pack.addProvider(ModModelProvider::new);
+		pack.addProvider(ModBlockTags::new);
 		pack.addProvider(ModWorldGenerator::new);
 		pack.addProvider(ModLootTableProvider::new);
 	}
