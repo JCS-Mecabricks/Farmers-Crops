@@ -3,7 +3,7 @@ package github.jcsmecabricks.customcrops.block;
 import github.jcsmecabricks.customcrops.CustomCrops;
 import github.jcsmecabricks.customcrops.block.custom.BlackberryBushBlock;
 import github.jcsmecabricks.customcrops.block.custom.BlueberryBushBlock;
-import github.jcsmecabricks.customcrops.block.custom.PastryBlock;
+import github.jcsmecabricks.customcrops.block.custom.PastryStationBlock;
 import github.jcsmecabricks.customcrops.block.custom.StrawberryBushBlock;
 import net.minecraft.block.AbstractBlock;
 import net.minecraft.block.Block;
@@ -30,7 +30,7 @@ public class ModBlocks {
                     .registryKey(RegistryKey.of(RegistryKeys.BLOCK, Identifier.of(CustomCrops.MOD_ID, "blackberry_bush")))));
 
     public static final Block PASTRY_STATION = registerBlock("pastry_station",
-            new PastryBlock(AbstractBlock.Settings.create().strength(2f).requiresTool()
+            new PastryStationBlock(AbstractBlock.Settings.create().strength(2f).requiresTool()
                     .registryKey(RegistryKey.of(RegistryKeys.BLOCK, Identifier.of(CustomCrops.MOD_ID, "pastry_station")))));
 
     public static <T extends Block> T register(String name, T block) {

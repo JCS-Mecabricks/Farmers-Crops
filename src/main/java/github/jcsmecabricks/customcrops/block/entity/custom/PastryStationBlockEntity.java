@@ -15,7 +15,6 @@ import net.minecraft.nbt.NbtCompound;
 import net.minecraft.network.listener.ClientPlayPacketListener;
 import net.minecraft.network.packet.Packet;
 import net.minecraft.network.packet.s2c.play.BlockEntityUpdateS2CPacket;
-import net.minecraft.recipe.RecipeEntry;
 import net.minecraft.registry.RegistryWrapper;
 import net.minecraft.screen.PropertyDelegate;
 import net.minecraft.screen.ScreenHandler;
@@ -26,9 +25,7 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import org.jetbrains.annotations.Nullable;
 
-import java.util.Optional;
-
-public class PastryBlockEntity extends BlockEntity implements ExtendedScreenHandlerFactory<BlockPos>, ImplementedInventory {
+public class PastryStationBlockEntity extends BlockEntity implements ExtendedScreenHandlerFactory<BlockPos>, ImplementedInventory {
     private final DefaultedList<ItemStack> inventory = DefaultedList.ofSize(4, ItemStack.EMPTY);
 
     private static final int INPUT_SLOT = 1;
@@ -39,14 +36,14 @@ public class PastryBlockEntity extends BlockEntity implements ExtendedScreenHand
     private int maxProgress = 72;
     private final int DEFAULT_MAX_PROGRESS = 72;
 
-    public PastryBlockEntity(BlockPos pos, BlockState state) {
+    public PastryStationBlockEntity(BlockPos pos, BlockState state) {
         super(ModBlockEntities.PASTRY_BE, pos, state);
         this.propertyDelegate = new PropertyDelegate() {
             @Override
             public int get(int index) {
                 return switch (index) {
-                    case 0 -> PastryBlockEntity.this.progress;
-                    case 1 -> PastryBlockEntity.this.maxProgress;
+                    case 0 -> PastryStationBlockEntity.this.progress;
+                    case 1 -> PastryStationBlockEntity.this.maxProgress;
                     default -> 0;
                 };
             }
@@ -54,8 +51,8 @@ public class PastryBlockEntity extends BlockEntity implements ExtendedScreenHand
             @Override
             public void set(int index, int value) {
                 switch (index) {
-                    case 0: PastryBlockEntity.this.progress = value;
-                    case 1: PastryBlockEntity.this.maxProgress = value;
+                    case 0: PastryStationBlockEntity.this.progress = value;
+                    case 1: PastryStationBlockEntity.this.maxProgress = value;
                 }
             }
 
@@ -105,15 +102,19 @@ public class PastryBlockEntity extends BlockEntity implements ExtendedScreenHand
     }
 
     public void tick(World world, BlockPos pos, BlockState state) {
-        if(world.isClient()) {
-            return;
-        }
+        if(hasRecipe() && canInsertIntoOutputSlot()) {
+            increaseCraftingProgress();
+            markDirty(world, pos, state);
 
-            if (hasCraftingFinished()) {
+            if(hasCraftingFinished()) {
                 craftItem();
                 resetProgress();
             }
         }
+        else {
+            resetProgress();
+        }
+    }
 
     private void resetProgress() {
         this.progress = 0;
@@ -127,12 +128,10 @@ public class PastryBlockEntity extends BlockEntity implements ExtendedScreenHand
     }
 
     private boolean hasCraftingFinished() {
-
         return this.progress >= this.maxProgress;
     }
 
     private void increaseCraftingProgress() {
-
         this.progress++;
     }
 
@@ -154,10 +153,7 @@ public class PastryBlockEntity extends BlockEntity implements ExtendedScreenHand
     }
 
     private boolean canInsertAmountIntoOutputSlot(int count) {
-        int maxCount = this.getStack(OUTPUT_SLOT).isEmpty() ? 64 : this.getStack(OUTPUT_SLOT).getMaxCount();
-        int currentCount = this.getStack(OUTPUT_SLOT).getCount();
-
-        return maxCount >= currentCount + count;
+        return this.getStack(OUTPUT_SLOT).getMaxCount() >= this.getStack(OUTPUT_SLOT).getCount() + count;
     }
 
     @Nullable

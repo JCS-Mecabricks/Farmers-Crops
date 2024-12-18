@@ -1,8 +1,10 @@
 package github.jcsmecabricks.customcrops;
 
 import github.jcsmecabricks.customcrops.block.ModBlocks;
+import github.jcsmecabricks.customcrops.block.entity.ModBlockEntities;
 import github.jcsmecabricks.customcrops.group.ModGroups;
 import github.jcsmecabricks.customcrops.item.ModItems;
+import github.jcsmecabricks.customcrops.screen.ModScreenHandlers;
 import github.jcsmecabricks.customcrops.world.gen.ModWorldGeneration;
 import net.fabricmc.api.ModInitializer;
 
@@ -23,6 +25,8 @@ public class CustomCrops implements ModInitializer {
 		ModBlocks.load();
 		ModItems.load();
 		ModGroups.load();
+		ModBlockEntities.registerBlockEntities();
+		ModScreenHandlers.registerScreenHandlers();
 		ModWorldGeneration.generateModWorldGen();
 		LOGGER.info("Loading...");
 		CompostingChanceRegistry.INSTANCE.add(ModItems.BLUEBERRIES, 0.30f);

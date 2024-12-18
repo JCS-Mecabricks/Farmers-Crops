@@ -10,7 +10,7 @@ ae78b457309ddd965e56d0c2ff13036af5f98090 assets/custom-crops/items/blueberries.j
 0333af244b1527d65ae347d743709c21de03bae0 assets/custom-crops/items/pastry_station.json
 86d145c7942f29e191f92a3efd3a2f7e9649bf75 assets/custom-crops/items/strawberries.json
 c3a634fb753e66ca37fa5e0b2c8bba99f5b61e5a assets/custom-crops/items/strawberry_bush.json
-38a031bf0dd8dc77acc803d8ae28dd18b3bd3328 assets/custom-crops/items/strawberry_lemonade.json.json
+5e25fbb9ecc70382a5ce1de6af0b75ab29e697da assets/custom-crops/items/strawberry_lemonade.json
 a4c7cda4bdfacc662f16b8a171bcad24f755ffdf assets/custom-crops/models/block/blackberry_bush_stage0.json
 26c7a483aeacdc9537f315811295dca51cf0c53e assets/custom-crops/models/block/blackberry_bush_stage1.json
 b340b784e3935ed204611621607d4b52c7c3436c assets/custom-crops/models/block/blackberry_bush_stage2.json
@@ -27,4 +27,4 @@ ee86b0452b7396008659386dc95e7922a3fd963a assets/custom-crops/models/block/bluebe
 6fdd5b4fe4734cc0078c18638d05ee781fcac9c9 assets/custom-crops/models/item/blackberries.json
 aa6e1f85c5e8c35339008c6babbe923093dfa283 assets/custom-crops/models/item/blueberries.json
 05cfa57bb990369837d1400a4b96bea48b689623 assets/custom-crops/models/item/strawberries.json
-beb49d95594851c7b5c9f62730d075c091a0cb57 assets/custom-crops/models/item/strawberry_lemonade.json.json
+23118392d4d072ae94918ce185c9986ca576030b assets/custom-crops/models/item/strawberry_lemonade.json

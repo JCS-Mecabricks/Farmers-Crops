@@ -17,6 +17,7 @@ public class ModGroups {
             .entries((displayContext, entries) -> {
                 entries.add(ModItems.BLUEBERRIES);
                 entries.add(ModItems.STRAWBERRIES);
+                entries.add(ModItems.STRAWBERRY_LEMONADE);
                 entries.add(ModItems.BLACKBERRIES);
                 entries.add(ModBlocks.PASTRY_STATION);
 }).build());

@@ -1,6 +1,6 @@
 package github.jcsmecabricks.customcrops.screen.custom;
 
-import github.jcsmecabricks.customcrops.block.entity.custom.PastryBlockEntity;
+import github.jcsmecabricks.customcrops.block.entity.custom.PastryStationBlockEntity;
 import github.jcsmecabricks.customcrops.screen.ModScreenHandlers;
 import net.minecraft.block.entity.BlockEntity;
 import net.minecraft.entity.player.PlayerEntity;
@@ -16,7 +16,7 @@ import net.minecraft.util.math.BlockPos;
 public class PastryScreenHandler extends ScreenHandler {
     private final Inventory inventory;
     private final PropertyDelegate propertyDelegate;
-    public final PastryBlockEntity blockEntity;
+    public final PastryStationBlockEntity blockEntity;
 
     public PastryScreenHandler(int syncId, PlayerInventory inventory, BlockPos pos) {
         this(syncId, inventory, inventory.player.getWorld().getBlockEntity(pos), new ArrayPropertyDelegate(2));
@@ -28,7 +28,7 @@ public class PastryScreenHandler extends ScreenHandler {
         checkSize((Inventory) blockEntity, 4);
         this.inventory = (Inventory) blockEntity;
         this.propertyDelegate = arrayPropertyDelegate;
-        this.blockEntity = ((PastryBlockEntity) blockEntity);
+        this.blockEntity = ((PastryStationBlockEntity) blockEntity);
 
         this.addSlot(new Slot(inventory, 1, 54, 34));
         this.addSlot(new Slot(inventory, 2, 104, 34));

@@ -28,10 +28,11 @@ public class ModItems {
                     .food(ModFoodComponents.BLACKBERRY)
                     .registryKey(RegistryKey.of(RegistryKeys.ITEM, Identifier.of(CustomCrops.MOD_ID, "blackberries")))));
 
-    public static final Item STRAWBERRY_LEMONADE = register("strawberry_lemonade.json",
+    public static final Item STRAWBERRY_LEMONADE = register("strawberry_lemonade",
             new Item(new Item.Settings()
+                    .maxCount(16)
                     .food(ModFoodComponents.STRAWBERRY_LEMONADE_FOOD, ModFoodComponents.STRAWBERRY_LEMONADE)
-                    .registryKey(RegistryKey.of(RegistryKeys.ITEM, Identifier.of(CustomCrops.MOD_ID, "strawberry_lemonade.json")))));
+                    .registryKey(RegistryKey.of(RegistryKeys.ITEM, Identifier.of(CustomCrops.MOD_ID, "strawberry_lemonade")))));
 
 
 

@@ -2,7 +2,7 @@ package github.jcsmecabricks.customcrops.block.custom;
 
 import com.mojang.serialization.MapCodec;
 import github.jcsmecabricks.customcrops.block.entity.ModBlockEntities;
-import github.jcsmecabricks.customcrops.block.entity.custom.PastryBlockEntity;
+import github.jcsmecabricks.customcrops.block.entity.custom.PastryStationBlockEntity;
 import net.minecraft.block.BlockRenderType;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.BlockWithEntity;
@@ -20,10 +20,10 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import org.jetbrains.annotations.Nullable;
 
-public class PastryBlock extends BlockWithEntity {
-    public static final MapCodec<PastryBlock> CODEC = createCodec(PastryBlock::new);
+public class PastryStationBlock extends BlockWithEntity {
+    public static final MapCodec<PastryStationBlock> CODEC = createCodec(PastryStationBlock::new);
 
-    public PastryBlock(Settings settings) {
+    public PastryStationBlock(Settings settings) {
         super(settings);
     }
 
@@ -35,7 +35,7 @@ public class PastryBlock extends BlockWithEntity {
     @Nullable
     @Override
     public BlockEntity createBlockEntity(BlockPos pos, BlockState state) {
-        return new PastryBlockEntity(pos, state);
+        return new PastryStationBlockEntity(pos, state);
     }
 
     @Override
@@ -46,8 +46,8 @@ public class PastryBlock extends BlockWithEntity {
     @Override
     public void onStateReplaced(BlockState state, World world, BlockPos pos, BlockState newState, boolean moved) {
         if (state.getBlock() != newState.getBlock()) {
-            if (world.getBlockEntity(pos) instanceof PastryBlockEntity pastryBlockEntity) {
-                ItemScatterer.spawn(world, pos, pastryBlockEntity);
+            if (world.getBlockEntity(pos) instanceof PastryStationBlockEntity pastryStationBlockEntity) {
+                ItemScatterer.spawn(world, pos, pastryStationBlockEntity);
                 world.updateComparators(pos,this);
             }
             super.onStateReplaced(state, world, pos, newState, moved);
@@ -57,7 +57,7 @@ public class PastryBlock extends BlockWithEntity {
     @Override
     protected ActionResult onUseWithItem(ItemStack stack, BlockState state, World world, BlockPos pos, PlayerEntity player, Hand hand, BlockHitResult hit) {
         if (!world.isClient) {
-            NamedScreenHandlerFactory screenHandlerFactory = ((PastryBlockEntity) world.getBlockEntity(pos));
+            NamedScreenHandlerFactory screenHandlerFactory = ((PastryStationBlockEntity) world.getBlockEntity(pos));
 
             if (screenHandlerFactory != null) {
                 player.openHandledScreen(screenHandlerFactory);
