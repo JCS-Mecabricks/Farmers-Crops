@@ -13,19 +13,26 @@ import net.minecraft.block.entity.BlockEntityType;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ItemPlacementContext;
 import net.minecraft.item.ItemStack;
+import net.minecraft.particle.ItemStackParticleEffect;
+import net.minecraft.particle.ParticleTypes;
 import net.minecraft.screen.NamedScreenHandlerFactory;
+import net.minecraft.sound.SoundCategory;
+import net.minecraft.sound.SoundEvents;
 import net.minecraft.state.StateManager;
+import net.minecraft.state.property.BooleanProperty;
 import net.minecraft.state.property.EnumProperty;
 import net.minecraft.state.property.Properties;
 import net.minecraft.util.*;
 import net.minecraft.util.hit.BlockHitResult;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Direction;
+import net.minecraft.util.math.random.Random;
 import net.minecraft.world.World;
 import org.jetbrains.annotations.Nullable;
 
 public class PastryStationBlock extends BlockWithEntity {
     public static final EnumProperty<Direction> FACING = Properties.HORIZONTAL_FACING;
+    public static final BooleanProperty LIT = Properties.LIT;
     public static final MapCodec<PastryStationBlock> CODEC = createCodec(PastryStationBlock::new);
 
     public PastryStationBlock(Settings settings) {
@@ -55,7 +62,7 @@ public class PastryStationBlock extends BlockWithEntity {
 
     @Override
     protected void appendProperties(StateManager.Builder<Block, BlockState> builder) {
-        builder.add(FACING);
+        builder.add(FACING, LIT);
     }
 
     @Nullable
@@ -97,4 +104,32 @@ public class PastryStationBlock extends BlockWithEntity {
         public <T extends BlockEntity> BlockEntityTicker<T> getTicker(World world, BlockState state, BlockEntityType<T> type) {
             return validateTicker(type, ModBlockEntities.PASTRY_BE, (world1, pos, state1, blockEntity) -> blockEntity.tick(world1, pos, state1));
         }
+    @Override
+    public void randomDisplayTick(BlockState state, World world, BlockPos pos, Random random) {
+        if (!state.get(LIT)) {
+            return;
+        }
+
+        double xPos = (double)pos.getX() + 0.5;
+        double yPos = pos.getY();
+        double zPos = (double)pos.getZ() + 0.5;
+        if (random.nextDouble() < 0.15) {
+            world.playSound(xPos, yPos, zPos, SoundEvents.BLOCK_BLASTFURNACE_FIRE_CRACKLE, SoundCategory.BLOCKS, 1.0f, 1.0f, false);
+        }
+
+        Direction direction = state.get(FACING);
+        Direction.Axis axis = direction.getAxis();
+
+        double defaultOffset = random.nextDouble() * 0.6 - 0.3;
+        double xOffsets = axis == Direction.Axis.X ? (double)direction.getOffsetX() * 0.52 : defaultOffset;
+        double yOffset = random.nextDouble() * 6.0 / 8.0;
+        double zOffset = axis == Direction.Axis.Z ? (double)direction.getOffsetZ() * 0.52 : defaultOffset;
+
+        world.addParticle(ParticleTypes.SMOKE, xPos + xOffsets, yPos + yOffset, zPos + zOffset, 0.0, 0.0, 0.0);
+
+        if(world.getBlockEntity(pos) instanceof PastryStationBlockEntity pastrystationBlockEntity && !pastrystationBlockEntity.getStack(1).isEmpty()) {
+            world.addParticle(new ItemStackParticleEffect(ParticleTypes.ITEM, pastrystationBlockEntity.getStack(1)),
+                    xPos + xOffsets, yPos + yOffset, zPos + zOffset, 0.0, 0.0, 0.0);
+        }
+    }
 }

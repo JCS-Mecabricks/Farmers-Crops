@@ -19,7 +19,7 @@ public class ModModelProvider extends FabricModelProvider {
 
     @Override
     public void generateBlockStateModels(BlockStateModelGenerator blockStateModelGenerator) {
-        blockStateModelGenerator.registerNorthDefaultHorizontalRotated(ModBlocks.PASTRY_STATION, TexturedModel.ORIENTABLE);
+        blockStateModelGenerator.registerCooker(ModBlocks.PASTRY_STATION, TexturedModel.ORIENTABLE);
         blockStateModelGenerator.registerTintableCrossBlockStateWithStages(ModBlocks.BLUEBERRY_BUSH, BlockStateModelGenerator.CrossType.NOT_TINTED,
                 BlueberryBushBlock.AGE, 0, 1, 2, 3);
         blockStateModelGenerator.registerTintableCrossBlockStateWithStages(ModBlocks.STRAWBERRY_BUSH, BlockStateModelGenerator.CrossType.NOT_TINTED,

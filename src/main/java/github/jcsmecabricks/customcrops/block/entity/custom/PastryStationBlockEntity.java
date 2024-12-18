@@ -1,5 +1,6 @@
 package github.jcsmecabricks.customcrops.block.entity.custom;
 
+import github.jcsmecabricks.customcrops.block.custom.PastryStationBlock;
 import github.jcsmecabricks.customcrops.block.entity.ImplementedInventory;
 import github.jcsmecabricks.customcrops.block.entity.ModBlockEntities;
 import github.jcsmecabricks.customcrops.item.ModItems;
@@ -104,6 +105,7 @@ public class PastryStationBlockEntity extends BlockEntity implements ExtendedScr
     public void tick(World world, BlockPos pos, BlockState state) {
         if(hasRecipe() && canInsertIntoOutputSlot()) {
             increaseCraftingProgress();
+            world.setBlockState(pos, state.with(PastryStationBlock.LIT, true));
             markDirty(world, pos, state);
 
             if(hasCraftingFinished()) {
@@ -112,6 +114,7 @@ public class PastryStationBlockEntity extends BlockEntity implements ExtendedScr
             }
         }
         else {
+            world.setBlockState(pos, state.with(PastryStationBlock.LIT, false));
             resetProgress();
         }
     }

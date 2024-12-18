@@ -1,0 +1,8 @@
+{
+  "parent": "minecraft:block/orientable",
+  "textures": {
+    "front": "custom-crops:block/pastry_station_front_on",
+    "side": "custom-crops:block/pastry_station_side",
+    "top": "custom-crops:block/pastry_station_top"
+  }
+}
