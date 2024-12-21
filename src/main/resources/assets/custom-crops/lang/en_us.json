@@ -1,8 +1,15 @@
 {
   "item.custom-crops.blueberries": "Blueberries",
+  "item.custom-crops.blueberry_bush": "Blueberry Bush",
+  "item.custom-crops.blackberry_bush": "Blackberry Bush",
+  "item.custom-crops.strawberry_bush": "Strawberry Bush",
+  "item.custom-crops.tomato_crop": "Tomato Crop",
   "item.custom-crops.blackberries": "Blackberries",
   "item.custom-crops.strawberries": "Strawberries",
   "item.custom-crops.pastry_station": "Pastry Station",
+  "item.custom-crops.blackberry_pie": "Blackberry Pie",
+  "item.custom-crops.tomato_seeds": "Tomato Seeds",
+  "item.custom-crops.tomato": "Tomato",
   "item.custom-crops.strawberry_lemonade": "Strawberry Lemonade",
   "gui.custom-crops.pastry_station": "Pastry Station",
   "itemGroup.custom-crops.farmers_crops_group": "Farmers Crops"

@@ -103,21 +103,26 @@ public class PastryStationBlockEntity extends BlockEntity implements ExtendedScr
     }
 
     public void tick(World world, BlockPos pos, BlockState state) {
-        if(hasRecipe() && canInsertIntoOutputSlot()) {
+        boolean isLit = state.get(PastryStationBlock.LIT);
+        if (hasRecipe() && canInsertIntoOutputSlot()) {
             increaseCraftingProgress();
-            world.setBlockState(pos, state.with(PastryStationBlock.LIT, true));
-            markDirty(world, pos, state);
+            if (!isLit) {
+                world.setBlockState(pos, state.with(PastryStationBlock.LIT, true), 3);
+                markDirty(world, pos, state);
+            }
 
-            if(hasCraftingFinished()) {
+            if (hasCraftingFinished()) {
                 craftItem();
                 resetProgress();
             }
-        }
-        else {
-            world.setBlockState(pos, state.with(PastryStationBlock.LIT, false));
-            resetProgress();
+        } else {
+            if (isLit) {
+                world.setBlockState(pos, state.with(PastryStationBlock.LIT, false), 3);
+                resetProgress();
+            }
         }
     }
+
 
     private void resetProgress() {
         this.progress = 0;
@@ -148,8 +153,9 @@ public class PastryStationBlockEntity extends BlockEntity implements ExtendedScr
         ItemStack output = new ItemStack(ModItems.STRAWBERRY_LEMONADE);
 
         return this.getStack(INPUT_SLOT).getItem() == input.getItem() &&
-                canInsertAmountIntoOutputSlot(output.getCount()) && canInsertItemIntoOutputSlot(output);
-    }
+                canInsertAmountIntoOutputSlot(output.getCount()) &&
+                canInsertItemIntoOutputSlot(output);
+  }
 
     private boolean canInsertItemIntoOutputSlot(ItemStack output) {
         return this.getStack(OUTPUT_SLOT).isEmpty() || this.getStack(OUTPUT_SLOT).getItem() == output.getItem();

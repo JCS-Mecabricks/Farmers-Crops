@@ -27,12 +27,28 @@ public class ModItems {
     public static final Item BLACKBERRIES = register("blackberries",
             new BlockItem(ModBlocks.BLACKBERRY_BUSH, new Item.Settings()
                     .food(ModFoodComponents.BLACKBERRY)
-                    .useRemainder(Items.GLASS_BOTTLE)
                     .registryKey(RegistryKey.of(RegistryKeys.ITEM, Identifier.of(CustomCrops.MOD_ID, "blackberries")))));
+
+    public static final Item BLACKBERRY_PIE = register("blackberry_pie",
+            new Item(new Item.Settings()
+                    .food(ModFoodComponents.BLACKBERRY_PIE)
+                    .registryKey(RegistryKey.of(RegistryKeys.ITEM, Identifier.of(CustomCrops.MOD_ID, "blackberry_pie")))));
+
+
+    public static final Item TOMATO_SEEDS = register("tomato_seeds",
+            new BlockItem(ModBlocks.TOMATO_CROP, new Item.Settings()
+                    .registryKey(RegistryKey.of(RegistryKeys.ITEM, Identifier.of(CustomCrops.MOD_ID, "tomato_seeds")))));
+
+    public static final Item TOMATO = register("tomato",
+            new Item(new Item.Settings()
+                    .food(ModFoodComponents.TOMATO)
+                    .registryKey(RegistryKey.of(RegistryKeys.ITEM, Identifier.of(CustomCrops.MOD_ID, "tomato")))));
+
 
     public static final Item STRAWBERRY_LEMONADE = register("strawberry_lemonade",
             new Item(new Item.Settings()
                     .maxCount(16)
+                    .useRemainder(Items.GLASS_BOTTLE)
                     .food(ModFoodComponents.STRAWBERRY_LEMONADE_FOOD, ModFoodComponents.STRAWBERRY_LEMONADE)
                     .registryKey(RegistryKey.of(RegistryKeys.ITEM, Identifier.of(CustomCrops.MOD_ID, "strawberry_lemonade")))));
 

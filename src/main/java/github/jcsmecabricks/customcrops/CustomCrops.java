@@ -30,6 +30,8 @@ public class CustomCrops implements ModInitializer {
 		ModWorldGeneration.generateModWorldGen();
 		LOGGER.info("Loading...");
 		CompostingChanceRegistry.INSTANCE.add(ModItems.BLUEBERRIES, 0.30f);
+		CompostingChanceRegistry.INSTANCE.add(ModItems.TOMATO, 0.50f);
+		CompostingChanceRegistry.INSTANCE.add(ModItems.TOMATO_SEEDS, 0.40f);
 		CompostingChanceRegistry.INSTANCE.add(ModItems.STRAWBERRIES, 0.30f);
 		CompostingChanceRegistry.INSTANCE.add(ModItems.BLACKBERRIES, 0.30f);
 

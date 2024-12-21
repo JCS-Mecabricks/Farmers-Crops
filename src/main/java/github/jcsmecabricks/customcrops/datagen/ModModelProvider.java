@@ -4,6 +4,7 @@ import github.jcsmecabricks.customcrops.block.ModBlocks;
 import github.jcsmecabricks.customcrops.block.custom.BlackberryBushBlock;
 import github.jcsmecabricks.customcrops.block.custom.BlueberryBushBlock;
 import github.jcsmecabricks.customcrops.block.custom.StrawberryBushBlock;
+import github.jcsmecabricks.customcrops.block.custom.TomatoCropBlock;
 import github.jcsmecabricks.customcrops.item.ModItems;
 import net.fabricmc.fabric.api.client.datagen.v1.provider.FabricModelProvider;
 import net.fabricmc.fabric.api.datagen.v1.FabricDataOutput;
@@ -19,6 +20,7 @@ public class ModModelProvider extends FabricModelProvider {
 
     @Override
     public void generateBlockStateModels(BlockStateModelGenerator blockStateModelGenerator) {
+        blockStateModelGenerator.registerCrop(ModBlocks.TOMATO_CROP, TomatoCropBlock.AGE, 0, 1, 2, 3, 4, 5);
         blockStateModelGenerator.registerCooker(ModBlocks.PASTRY_STATION, TexturedModel.ORIENTABLE);
         blockStateModelGenerator.registerTintableCrossBlockStateWithStages(ModBlocks.BLUEBERRY_BUSH, BlockStateModelGenerator.CrossType.NOT_TINTED,
                 BlueberryBushBlock.AGE, 0, 1, 2, 3);
@@ -31,5 +33,7 @@ public class ModModelProvider extends FabricModelProvider {
     @Override
     public void generateItemModels(ItemModelGenerator itemModelGenerator) {
         itemModelGenerator.register(ModItems.STRAWBERRY_LEMONADE, Models.GENERATED);
+        itemModelGenerator.register(ModItems.TOMATO, Models.GENERATED);
+        itemModelGenerator.register(ModItems.BLACKBERRY_PIE, Models.GENERATED);
     }
 }
