@@ -9,7 +9,9 @@ ed4ad3d56e912faabe9aa510e552cea2a70c76ca assets/custom-crops/blockstates/strawbe
 51a43bb02bf82ac4faa9d5cef35236b4fead3143 assets/custom-crops/items/blackberry_pie.json
 ae78b457309ddd965e56d0c2ff13036af5f98090 assets/custom-crops/items/blueberries.json
 e4f3128ef363c6e70ebc9371043a4da8c6a69382 assets/custom-crops/items/corn.json
-465a42f5d5d277eb14425cb6391947c251a4dc46 assets/custom-crops/items/corn_seeds.json
+4286d93a9a1fea47a89ed0c3ead7209bef9a563e assets/custom-crops/items/corn_kernel.json
+e91a7c38d18ef7b1d0011e2c00a8d144fb1c59a2 assets/custom-crops/items/corn_on_the_cob.json
+3ba6f923140833d135df496e527b8c9b8f4b4ba5 assets/custom-crops/items/muffin.json
 0333af244b1527d65ae347d743709c21de03bae0 assets/custom-crops/items/pastry_station.json
 86d145c7942f29e191f92a3efd3a2f7e9649bf75 assets/custom-crops/items/strawberries.json
 5e25fbb9ecc70382a5ce1de6af0b75ab29e697da assets/custom-crops/items/strawberry_lemonade.json
@@ -46,7 +48,9 @@ faf6606507993d148bb3e70708678afd94787593 assets/custom-crops/models/block/tomato
 dbe712086196b436b20bd1d5ce1883e4c32906aa assets/custom-crops/models/item/blackberry_pie.json
 aa6e1f85c5e8c35339008c6babbe923093dfa283 assets/custom-crops/models/item/blueberries.json
 ecdab2cd2d9371fc9c2df02e2930dc60569f0a86 assets/custom-crops/models/item/corn.json
-fd99e2b716a65d1d06b7111a2bda52c940ef7229 assets/custom-crops/models/item/corn_seeds.json
+bf320800dbc72158f67f584cb0dab22114ac286c assets/custom-crops/models/item/corn_kernel.json
+03616a6b763a501d5ae3f9e064cb9739c3df9be6 assets/custom-crops/models/item/corn_on_the_cob.json
+9febeee9534b450ef672592b2215f441d8cf6091 assets/custom-crops/models/item/muffin.json
 05cfa57bb990369837d1400a4b96bea48b689623 assets/custom-crops/models/item/strawberries.json
 23118392d4d072ae94918ce185c9986ca576030b assets/custom-crops/models/item/strawberry_lemonade.json
 0c729e69bd13abfc8dcab39e73567baf85ae95ad assets/custom-crops/models/item/tomato.json

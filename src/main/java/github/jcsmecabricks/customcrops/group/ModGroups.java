@@ -20,9 +20,11 @@ public class ModGroups {
                 entries.add(ModItems.STRAWBERRY_LEMONADE);
                 entries.add(ModItems.BLACKBERRIES);
                 entries.add(ModItems.TOMATO);
+                entries.add(ModItems.CORN_ON_THE_COB);
+                entries.add(ModItems.BLACKBERRY_PIE);
                 entries.add(ModItems.TOMATO_SEEDS);
                 entries.add(ModItems.CORN);
-                entries.add(ModItems.CORN_SEEDS);
+                entries.add(ModItems.CORN_KERNEL);
                 entries.add(ModBlocks.PASTRY_STATION);
 }).build());
     public static <T extends ItemGroup> T register(String name, T itemGroup) {

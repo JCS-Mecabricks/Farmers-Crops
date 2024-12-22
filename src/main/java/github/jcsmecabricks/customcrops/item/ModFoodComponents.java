@@ -39,6 +39,16 @@ public class ModFoodComponents {
             .saturationModifier(0.3f)
             .build();
 
+    public static final FoodComponent MUFFIN = new FoodComponent.Builder()
+            .nutrition(8)
+            .saturationModifier(0.5f)
+            .build();
+
+    public static final FoodComponent CORN_COB = new FoodComponent.Builder()
+            .nutrition(8)
+            .saturationModifier(0.5f)
+            .build();
+
     public static final ConsumableComponent STRAWBERRY_LEMONADE = drink()
             .consumeSeconds(2.0F)
             .sound(SoundEvents.ENTITY_GENERIC_DRINK)

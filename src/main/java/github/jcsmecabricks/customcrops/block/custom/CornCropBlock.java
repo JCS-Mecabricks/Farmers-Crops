@@ -18,7 +18,7 @@ public class CornCropBlock extends CropBlock {
 
     @Override
     protected ItemConvertible getSeedsItem() {
-        return ModItems.CORN_SEEDS;
+        return ModItems.CORN_KERNEL;
     }
 
     @Override

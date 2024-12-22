@@ -1,9 +1,6 @@
 package github.jcsmecabricks.customcrops;
 
-import github.jcsmecabricks.customcrops.datagen.ModBlockTags;
-import github.jcsmecabricks.customcrops.datagen.ModLootTableProvider;
-import github.jcsmecabricks.customcrops.datagen.ModModelProvider;
-import github.jcsmecabricks.customcrops.datagen.ModWorldGenerator;
+import github.jcsmecabricks.customcrops.datagen.*;
 import github.jcsmecabricks.customcrops.world.ModConfiguredFeatures;
 import github.jcsmecabricks.customcrops.world.ModPlacedFeatures;
 import net.fabricmc.fabric.api.datagen.v1.DataGeneratorEntrypoint;
@@ -19,6 +16,7 @@ public class CustomCropsDataGenerator implements DataGeneratorEntrypoint {
 		pack.addProvider(ModBlockTags::new);
 		pack.addProvider(ModWorldGenerator::new);
 		pack.addProvider(ModLootTableProvider::new);
+		pack.addProvider(ModRecipeProvider::new);
 	}
 
 	@Override

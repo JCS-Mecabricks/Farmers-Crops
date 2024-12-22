@@ -131,7 +131,7 @@ public class PastryStationBlockEntity extends BlockEntity implements ExtendedScr
 
     private void craftItem() {
         this.removeStack(INPUT_SLOT, 1);
-        this.setStack(OUTPUT_SLOT, new ItemStack(ModItems.STRAWBERRY_LEMONADE,
+        this.setStack(OUTPUT_SLOT, new ItemStack(ModItems.MUFFIN,
                 this.getStack(OUTPUT_SLOT).getCount() + 1));
     }
 
@@ -149,8 +149,8 @@ public class PastryStationBlockEntity extends BlockEntity implements ExtendedScr
     }
 
     private boolean hasRecipe() {
-        ItemStack input = new ItemStack(ModItems.STRAWBERRIES);
-        ItemStack output = new ItemStack(ModItems.STRAWBERRY_LEMONADE);
+        ItemStack input = new ItemStack(ModItems.BLUEBERRIES);
+        ItemStack output = new ItemStack(ModItems.MUFFIN);
 
         return this.getStack(INPUT_SLOT).getItem() == input.getItem() &&
                 canInsertAmountIntoOutputSlot(output.getCount()) &&

@@ -39,9 +39,9 @@ public class ModItems {
             new BlockItem(ModBlocks.TOMATO_CROP, new Item.Settings()
                     .registryKey(RegistryKey.of(RegistryKeys.ITEM, Identifier.of(CustomCrops.MOD_ID, "tomato_seeds")))));
 
-    public static final Item CORN_SEEDS = registerItem("corn_seeds",
+    public static final Item CORN_KERNEL = registerItem("corn_kernel",
             new BlockItem(ModBlocks.CORN_CROP, new Item.Settings()
-                    .registryKey(RegistryKey.of(RegistryKeys.ITEM, Identifier.of(CustomCrops.MOD_ID, "corn_seeds")))));
+                    .registryKey(RegistryKey.of(RegistryKeys.ITEM, Identifier.of(CustomCrops.MOD_ID, "corn_kernel")))));
 
 
     public static final Item TOMATO = registerItem("tomato",
@@ -53,6 +53,16 @@ public class ModItems {
             new Item(new Item.Settings()
                     .food(ModFoodComponents.CORN)
                     .registryKey(RegistryKey.of(RegistryKeys.ITEM, Identifier.of(CustomCrops.MOD_ID, "corn")))));
+
+    public static final Item CORN_ON_THE_COB = registerItem("corn_on_the_cob",
+            new Item(new Item.Settings()
+                    .food(ModFoodComponents.CORN_COB)
+                    .registryKey(RegistryKey.of(RegistryKeys.ITEM, Identifier.of(CustomCrops.MOD_ID, "corn_on_the_cob")))));
+
+    public static final Item MUFFIN = registerItem("muffin",
+            new Item(new Item.Settings()
+                    .food(ModFoodComponents.MUFFIN)
+                    .registryKey(RegistryKey.of(RegistryKeys.ITEM, Identifier.of(CustomCrops.MOD_ID, "muffin")))));
 
 
     public static final Item STRAWBERRY_LEMONADE = registerItem("strawberry_lemonade",
