@@ -1,10 +1,7 @@
 package github.jcsmecabricks.customcrops.datagen;
 
 import github.jcsmecabricks.customcrops.block.ModBlocks;
-import github.jcsmecabricks.customcrops.block.custom.BlackberryBushBlock;
-import github.jcsmecabricks.customcrops.block.custom.BlueberryBushBlock;
-import github.jcsmecabricks.customcrops.block.custom.StrawberryBushBlock;
-import github.jcsmecabricks.customcrops.block.custom.TomatoCropBlock;
+import github.jcsmecabricks.customcrops.block.custom.*;
 import github.jcsmecabricks.customcrops.item.ModItems;
 import net.fabricmc.fabric.api.datagen.v1.FabricDataOutput;
 import net.fabricmc.fabric.api.datagen.v1.provider.FabricBlockLootTableProvider;
@@ -35,6 +32,10 @@ public class ModLootTableProvider extends FabricBlockLootTableProvider {
         BlockStatePropertyLootCondition.Builder builder2 = BlockStatePropertyLootCondition.builder(ModBlocks.TOMATO_CROP)
                 .properties(StatePredicate.Builder.create().exactMatch(TomatoCropBlock.AGE, TomatoCropBlock.MAX_AGE));
         this.addDrop(ModBlocks.TOMATO_CROP, this.cropDrops(ModBlocks.TOMATO_CROP, ModItems.TOMATO, ModItems.TOMATO_SEEDS, builder2));
+
+        BlockStatePropertyLootCondition.Builder builder = BlockStatePropertyLootCondition.builder(ModBlocks.CORN_CROP)
+                .properties(StatePredicate.Builder.create().exactMatch(CornCropBlock.AGE, CornCropBlock.MAX_AGE));
+        this.addDrop(ModBlocks.CORN_CROP, this.cropDrops(ModBlocks.CORN_CROP, ModItems.CORN, ModItems.CORN_SEEDS, builder));
 
         this.addDrop(ModBlocks.BLUEBERRY_BUSH,
                 block -> this.applyExplosionDecay(

@@ -5,7 +5,6 @@ import github.jcsmecabricks.customcrops.block.custom.*;
 import net.minecraft.block.AbstractBlock;
 import net.minecraft.block.Block;
 import net.minecraft.block.Blocks;
-import net.minecraft.block.MapColor;
 import net.minecraft.block.piston.PistonBehavior;
 import net.minecraft.item.BlockItem;
 import net.minecraft.item.Item;
@@ -34,7 +33,13 @@ public class ModBlocks {
                     .ticksRandomly().breakInstantly().sounds(BlockSoundGroup.CROP).pistonBehavior(PistonBehavior.DESTROY)
                     .registryKey(RegistryKey.of(RegistryKeys.BLOCK, Identifier.of(CustomCrops.MOD_ID, "tomato_crop")))));
 
-    public static final Block PASTRY_STATION = register("pastry_station",
+    public static final Block CORN_CROP = registerBlockWithoutBlockItem("corn_crop",
+            new CornCropBlock(AbstractBlock.Settings.create().noCollision()
+                    .ticksRandomly().breakInstantly().sounds(BlockSoundGroup.CROP).pistonBehavior(PistonBehavior.DESTROY)
+                    .registryKey(RegistryKey.of(RegistryKeys.BLOCK, Identifier.of(CustomCrops.MOD_ID, "corn_crop")))));
+
+
+    public static final Block PASTRY_STATION = registerBlock("pastry_station",
             new PastryStationBlock(AbstractBlock.Settings.create().strength(2f).requiresTool()
                     .registryKey(RegistryKey.of(RegistryKeys.BLOCK, Identifier.of(CustomCrops.MOD_ID, "pastry_station")))));
 
@@ -57,7 +62,8 @@ public class ModBlocks {
 
     private static void registerBlockItem(String name, Block block) {
         Registry.register(Registries.ITEM, Identifier.of(CustomCrops.MOD_ID, name),
-                new BlockItem(block, new Item.Settings()));
+                new BlockItem(block, new Item.Settings()
+                        .registryKey(RegistryKey.of(RegistryKeys.ITEM, Identifier.of(CustomCrops.MOD_ID, name))).useBlockPrefixedTranslationKey()));
     }
     public static void load() {}
 }
