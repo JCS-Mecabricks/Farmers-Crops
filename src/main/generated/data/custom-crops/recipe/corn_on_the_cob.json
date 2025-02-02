@@ -1,0 +1,10 @@
+{
+  "type": "minecraft:smoking",
+  "category": "food",
+  "cookingtime": 200,
+  "experience": 0.4,
+  "ingredient": "custom-crops:corn",
+  "result": {
+    "id": "custom-crops:corn_on_the_cob"
+  }
+}

@@ -1,0 +1,18 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "A": "custom-crops:blackberries",
+    "E": "minecraft:bread",
+    "P": "minecraft:paper"
+  },
+  "pattern": [
+    " E ",
+    "EAE",
+    "PPP"
+  ],
+  "result": {
+    "count": 1,
+    "id": "custom-crops:blackberry_pie"
+  }
+}

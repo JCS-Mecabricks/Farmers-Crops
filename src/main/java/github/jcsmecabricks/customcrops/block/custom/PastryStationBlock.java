@@ -101,9 +101,9 @@ public class PastryStationBlock extends BlockWithEntity {
     }
 
     @Override
-        public <T extends BlockEntity> BlockEntityTicker<T> getTicker(World world, BlockState state, BlockEntityType<T> type) {
-            return validateTicker(type, ModBlockEntities.PASTRY_BE, (world1, pos, state1, blockEntity) -> blockEntity.tick(world1, pos, state1));
-        }
+    public <T extends BlockEntity> BlockEntityTicker<T> getTicker(World world, BlockState state, BlockEntityType<T> type) {
+        return validateTicker(type, ModBlockEntities.PASTRY_BE, (world1, pos, state1, blockEntity) -> blockEntity.tick(world1, pos, state1));
+    }
     @Override
     public void randomDisplayTick(BlockState state, World world, BlockPos pos, Random random) {
         if (!state.get(LIT)) {

@@ -1,0 +1,17 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "E": "minecraft:bread",
+    "P": "minecraft:furnace"
+  },
+  "pattern": [
+    " E ",
+    "EPE",
+    " E "
+  ],
+  "result": {
+    "count": 1,
+    "id": "custom-crops:pastry_station"
+  }
+}

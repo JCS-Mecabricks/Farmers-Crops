@@ -2,6 +2,7 @@ package github.jcsmecabricks.customcrops.item;
 
 import github.jcsmecabricks.customcrops.CustomCrops;
 import github.jcsmecabricks.customcrops.block.ModBlocks;
+import github.jcsmecabricks.customcrops.item.custom.StrawberryLemonadeItem;
 import net.minecraft.item.BlockItem;
 import net.minecraft.item.Item;
 import net.minecraft.item.Items;
@@ -66,9 +67,8 @@ public class ModItems {
 
 
     public static final Item STRAWBERRY_LEMONADE = registerItem("strawberry_lemonade",
-            new Item(new Item.Settings()
+            new StrawberryLemonadeItem(new Item.Settings()
                     .maxCount(16)
-                    .useRemainder(Items.GLASS_BOTTLE)
                     .food(ModFoodComponents.STRAWBERRY_LEMONADE_FOOD, ModFoodComponents.STRAWBERRY_LEMONADE)
                     .registryKey(RegistryKey.of(RegistryKeys.ITEM, Identifier.of(CustomCrops.MOD_ID, "strawberry_lemonade")))));
 

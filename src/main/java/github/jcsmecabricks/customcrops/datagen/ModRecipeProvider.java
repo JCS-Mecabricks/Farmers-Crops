@@ -37,7 +37,7 @@ public class ModRecipeProvider extends FabricRecipeProvider {
                         .criterion(hasItem(Items.RED_DYE), conditionsFromItem(Items.RED_DYE))
                         .offerTo(exporter);
 
-                createShaped(RecipeCategory.FOOD, ModItems.TOMATO_SEEDS)
+                createShaped(RecipeCategory.FOOD, ModItems.BLACKBERRY_PIE)
                         .input('E', Items.BREAD)
                         .input('P', Items.PAPER)
                         .input('A', ModItems.BLACKBERRIES)
