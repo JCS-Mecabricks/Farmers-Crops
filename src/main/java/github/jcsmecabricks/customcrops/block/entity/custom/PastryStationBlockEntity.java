@@ -97,8 +97,8 @@ public class PastryStationBlockEntity extends BlockEntity implements ExtendedScr
     @Override
     protected void readNbt(NbtCompound nbt, RegistryWrapper.WrapperLookup registryLookup) {
         Inventories.readNbt(nbt, inventory, registryLookup);
-        progress = nbt.getInt("pastry_station.progress");
-        maxProgress = nbt.getInt("pastry_station.max_progress");
+        nbt.putInt("pastry_station.progress", progress);
+        nbt.putInt("pastry_station.max_progress", maxProgress);
         super.readNbt(nbt, registryLookup);
     }
 
@@ -155,7 +155,7 @@ public class PastryStationBlockEntity extends BlockEntity implements ExtendedScr
         return this.getStack(INPUT_SLOT).getItem() == input.getItem() &&
                 canInsertAmountIntoOutputSlot(output.getCount()) &&
                 canInsertItemIntoOutputSlot(output);
-  }
+    }
 
     private boolean canInsertItemIntoOutputSlot(ItemStack output) {
         return this.getStack(OUTPUT_SLOT).isEmpty() || this.getStack(OUTPUT_SLOT).getItem() == output.getItem();

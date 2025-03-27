@@ -16,6 +16,7 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.particle.ItemStackParticleEffect;
 import net.minecraft.particle.ParticleTypes;
 import net.minecraft.screen.NamedScreenHandlerFactory;
+import net.minecraft.server.world.ServerWorld;
 import net.minecraft.sound.SoundCategory;
 import net.minecraft.sound.SoundEvents;
 import net.minecraft.state.StateManager;
@@ -77,13 +78,13 @@ public class PastryStationBlock extends BlockWithEntity {
     }
 
     @Override
-    public void onStateReplaced(BlockState state, World world, BlockPos pos, BlockState newState, boolean moved) {
-        if (state.getBlock() != newState.getBlock()) {
+    protected void onStateReplaced(BlockState state, ServerWorld world, BlockPos pos, boolean moved) {
+        if (state.getBlock() != state.getBlock()) {
             if (world.getBlockEntity(pos) instanceof PastryStationBlockEntity pastryStationBlockEntity) {
                 ItemScatterer.spawn(world, pos, pastryStationBlockEntity);
                 world.updateComparators(pos,this);
             }
-            super.onStateReplaced(state, world, pos, newState, moved);
+            super.onStateReplaced(state, world, pos, moved);
         }
     }
 
@@ -114,7 +115,7 @@ public class PastryStationBlock extends BlockWithEntity {
         double yPos = pos.getY();
         double zPos = (double)pos.getZ() + 0.5;
         if (random.nextDouble() < 0.15) {
-            world.playSound(xPos, yPos, zPos, SoundEvents.BLOCK_BLASTFURNACE_FIRE_CRACKLE, SoundCategory.BLOCKS, 1.0f, 1.0f, false);
+            world.playSound(null, xPos, yPos, zPos, SoundEvents.BLOCK_BLASTFURNACE_FIRE_CRACKLE, SoundCategory.BLOCKS);
         }
 
         Direction direction = state.get(FACING);
@@ -125,10 +126,10 @@ public class PastryStationBlock extends BlockWithEntity {
         double yOffset = random.nextDouble() * 6.0 / 8.0;
         double zOffset = axis == Direction.Axis.Z ? (double)direction.getOffsetZ() * 0.52 : defaultOffset;
 
-        world.addParticle(ParticleTypes.SMOKE, xPos + xOffsets, yPos + yOffset, zPos + zOffset, 0.0, 0.0, 0.0);
+        world.addParticleClient(ParticleTypes.SMOKE, xPos + xOffsets, yPos + yOffset, zPos + zOffset, 0.0, 0.0, 0.0);
 
         if(world.getBlockEntity(pos) instanceof PastryStationBlockEntity pastrystationBlockEntity && !pastrystationBlockEntity.getStack(1).isEmpty()) {
-            world.addParticle(new ItemStackParticleEffect(ParticleTypes.ITEM, pastrystationBlockEntity.getStack(1)),
+            world.addParticleClient(new ItemStackParticleEffect(ParticleTypes.ITEM, pastrystationBlockEntity.getStack(1)),
                     xPos + xOffsets, yPos + yOffset, zPos + zOffset, 0.0, 0.0, 0.0);
         }
     }
