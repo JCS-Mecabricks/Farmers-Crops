@@ -1,0 +1,7 @@
+{
+  "type": "custom-crops:baking",
+  "ingredient": "custom-crops:strawberries",
+  "result": {
+    "id": "custom-crops:strawberry_lemonade"
+  }
+}

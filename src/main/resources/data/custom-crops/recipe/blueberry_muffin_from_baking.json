@@ -1,0 +1,7 @@
+{
+  "type": "custom-crops:baking",
+  "ingredient": "custom-crops:blueberries",
+  "result": {
+    "id": "custom-crops:muffin"
+  }
+}
