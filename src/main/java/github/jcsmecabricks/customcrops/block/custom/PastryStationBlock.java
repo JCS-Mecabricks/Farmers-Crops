@@ -88,23 +88,30 @@ public class PastryStationBlock extends BlockWithEntity {
         }
     }
 
+
     @Override
-    protected ActionResult onUseWithItem(ItemStack stack, BlockState state, World world, BlockPos pos, PlayerEntity player, Hand hand, BlockHitResult hit) {
+    protected ActionResult onUseWithItem(ItemStack stack, BlockState state, World world, BlockPos pos,
+                                         PlayerEntity player, Hand hand, BlockHitResult hit) {
         if (!world.isClient) {
             NamedScreenHandlerFactory screenHandlerFactory = ((PastryStationBlockEntity) world.getBlockEntity(pos));
-
             if (screenHandlerFactory != null) {
                 player.openHandledScreen(screenHandlerFactory);
             }
         }
-
         return ActionResult.SUCCESS;
     }
 
+    @Nullable
     @Override
     public <T extends BlockEntity> BlockEntityTicker<T> getTicker(World world, BlockState state, BlockEntityType<T> type) {
-        return validateTicker(type, ModBlockEntities.PASTRY_BE, (world1, pos, state1, blockEntity) -> blockEntity.tick(world1, pos, state1));
+        if(world.isClient()) {
+            return null;
+        }
+
+        return validateTicker(type, ModBlockEntities.PASTRY_BE,
+                (world1, pos, state1, blockEntity) -> blockEntity.tick(world1, pos, state1));
     }
+
     @Override
     public void randomDisplayTick(BlockState state, World world, BlockPos pos, Random random) {
         if (!state.get(LIT)) {

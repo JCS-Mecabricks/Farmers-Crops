@@ -23,15 +23,14 @@ public class PastryScreenHandler extends ScreenHandler {
     }
 
     public PastryScreenHandler(int syncId, PlayerInventory playerInventory,
-                                     BlockEntity blockEntity, PropertyDelegate arrayPropertyDelegate) {
+                                      BlockEntity blockEntity, PropertyDelegate arrayPropertyDelegate) {
         super(ModScreenHandlers.PASTRY_STATION_SCREEN_HANDLER, syncId);
-        checkSize((Inventory) blockEntity, 4);
-        this.inventory = (Inventory) blockEntity;
-        this.propertyDelegate = arrayPropertyDelegate;
+        this.inventory = ((Inventory) blockEntity);
         this.blockEntity = ((PastryStationBlockEntity) blockEntity);
+        this.propertyDelegate = arrayPropertyDelegate;
 
-        this.addSlot(new Slot(inventory, 1, 54, 34));
-        this.addSlot(new Slot(inventory, 2, 104, 34));
+        this.addSlot(new Slot(inventory, 0, 54, 34));
+        this.addSlot(new Slot(inventory, 1, 104, 34));
 
         addPlayerInventory(playerInventory);
         addPlayerHotbar(playerInventory);
@@ -46,7 +45,7 @@ public class PastryScreenHandler extends ScreenHandler {
     public int getScaledArrowProgress() {
         int progress = this.propertyDelegate.get(0);
         int maxProgress = this.propertyDelegate.get(1); // Max Progress
-        int arrowPixelSize = 24;
+        int arrowPixelSize = 24; // This is the width in pixels of your arrow
 
         return maxProgress != 0 && progress != 0 ? progress * arrowPixelSize / maxProgress : 0;
     }

@@ -15,6 +15,8 @@ import net.minecraft.registry.RegistryKeys;
 import net.minecraft.sound.BlockSoundGroup;
 import net.minecraft.util.Identifier;
 
+import java.util.function.Function;
+
 public class ModBlocks {
     public static final Block BLUEBERRY_BUSH = registerBlockWithoutBlockItem("blueberry_bush",
             new BlueberryBushBlock(AbstractBlock.Settings.copy(Blocks.SWEET_BERRY_BUSH)
@@ -38,10 +40,16 @@ public class ModBlocks {
                     .ticksRandomly().breakInstantly().sounds(BlockSoundGroup.CROP).pistonBehavior(PistonBehavior.DESTROY)
                     .registryKey(RegistryKey.of(RegistryKeys.BLOCK, Identifier.of(CustomCrops.MOD_ID, "corn_crop")))));
 
+    public static final Block PASTRY_STATION = registerBlock("pastry_station", properties ->
+            new PastryStationBlock(properties.strength(2f).requiresTool()));
 
-    public static final Block PASTRY_STATION = registerBlock("pastry_station",
-            new PastryStationBlock(AbstractBlock.Settings.create().strength(2f).requiresTool()
-                    .registryKey(RegistryKey.of(RegistryKeys.BLOCK, Identifier.of(CustomCrops.MOD_ID, "pastry_station")))));
+
+
+    private static Block registerBlock(String name, Function<AbstractBlock.Settings, Block> function) {
+        Block toRegister = function.apply(AbstractBlock.Settings.create().registryKey(RegistryKey.of(RegistryKeys.BLOCK, Identifier.of(CustomCrops.MOD_ID, name))));
+        registerBlockItem(name, toRegister);
+        return Registry.register(Registries.BLOCK, Identifier.of(CustomCrops.MOD_ID, name), toRegister);
+    }
 
     public static <T extends Block> T register(String name, T block) {
         CustomCrops.LOGGER.info("Registering block and item for: {}", name);

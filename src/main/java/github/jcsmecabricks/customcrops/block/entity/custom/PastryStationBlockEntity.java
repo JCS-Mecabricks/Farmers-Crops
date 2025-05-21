@@ -4,6 +4,9 @@ import github.jcsmecabricks.customcrops.block.custom.PastryStationBlock;
 import github.jcsmecabricks.customcrops.block.entity.ImplementedInventory;
 import github.jcsmecabricks.customcrops.block.entity.ModBlockEntities;
 import github.jcsmecabricks.customcrops.item.ModItems;
+import github.jcsmecabricks.customcrops.recipe.ModRecipes;
+import github.jcsmecabricks.customcrops.recipe.PastryStationRecipe;
+import github.jcsmecabricks.customcrops.recipe.PastryStationRecipeInput;
 import github.jcsmecabricks.customcrops.screen.custom.PastryScreenHandler;
 import net.fabricmc.fabric.api.screenhandler.v1.ExtendedScreenHandlerFactory;
 import net.minecraft.block.BlockState;
@@ -16,26 +19,30 @@ import net.minecraft.nbt.NbtCompound;
 import net.minecraft.network.listener.ClientPlayPacketListener;
 import net.minecraft.network.packet.Packet;
 import net.minecraft.network.packet.s2c.play.BlockEntityUpdateS2CPacket;
+import net.minecraft.recipe.RecipeEntry;
 import net.minecraft.registry.RegistryWrapper;
 import net.minecraft.screen.PropertyDelegate;
 import net.minecraft.screen.ScreenHandler;
 import net.minecraft.server.network.ServerPlayerEntity;
+import net.minecraft.server.world.ServerWorld;
 import net.minecraft.text.Text;
+import net.minecraft.util.ItemScatterer;
 import net.minecraft.util.collection.DefaultedList;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import org.jetbrains.annotations.Nullable;
 
-public class PastryStationBlockEntity extends BlockEntity implements ExtendedScreenHandlerFactory<BlockPos>, ImplementedInventory {
-    private final DefaultedList<ItemStack> inventory = DefaultedList.ofSize(4, ItemStack.EMPTY);
+import java.util.Optional;
 
-    private static final int INPUT_SLOT = 1;
-    private static final int OUTPUT_SLOT = 2;
+public class PastryStationBlockEntity extends BlockEntity implements ExtendedScreenHandlerFactory<BlockPos>, ImplementedInventory {
+    private final DefaultedList<ItemStack> inventory = DefaultedList.ofSize(2, ItemStack.EMPTY);
+
+    private static final int INPUT_SLOT = 0;
+    private static final int OUTPUT_SLOT = 1;
 
     protected final PropertyDelegate propertyDelegate;
     private int progress = 0;
     private int maxProgress = 72;
-    private final int DEFAULT_MAX_PROGRESS = 72;
 
     public PastryStationBlockEntity(BlockPos pos, BlockState state) {
         super(ModBlockEntities.PASTRY_BE, pos, state);
@@ -77,13 +84,18 @@ public class PastryStationBlockEntity extends BlockEntity implements ExtendedScr
     @Override
     public Text getDisplayName() {
         return Text.translatable("gui.custom-crops.pastry_station");
-
     }
 
     @Nullable
     @Override
     public ScreenHandler createMenu(int syncId, PlayerInventory playerInventory, PlayerEntity player) {
-        return new PastryScreenHandler(syncId, playerInventory, this, propertyDelegate);
+        return new PastryScreenHandler(syncId, playerInventory, this, this.propertyDelegate);
+    }
+
+    @Override
+    public void onBlockReplaced(BlockPos pos, BlockState oldState) {
+        ItemScatterer.spawn(world, pos, (this));
+        super.onBlockReplaced(pos, oldState);
     }
 
     @Override
@@ -97,42 +109,49 @@ public class PastryStationBlockEntity extends BlockEntity implements ExtendedScr
     @Override
     protected void readNbt(NbtCompound nbt, RegistryWrapper.WrapperLookup registryLookup) {
         Inventories.readNbt(nbt, inventory, registryLookup);
-        nbt.putInt("pastry_station.progress", progress);
-        nbt.putInt("pastry_station.max_progress", maxProgress);
+        progress = nbt.getInt("pastry_station.progress").get();
+        maxProgress = nbt.getInt("pastry_station.max_progress").get();
         super.readNbt(nbt, registryLookup);
     }
 
     public void tick(World world, BlockPos pos, BlockState state) {
+        if (world.isClient) return; // run only on server
+
+        boolean hasRecipe = hasRecipe();
         boolean isLit = state.get(PastryStationBlock.LIT);
-        if (hasRecipe() && canInsertIntoOutputSlot()) {
+
+        if (hasRecipe && !isLit) {
+            world.setBlockState(pos, state.with(PastryStationBlock.LIT, true), 3);
+        } else if (!hasRecipe && isLit) {
+            world.setBlockState(pos, state.with(PastryStationBlock.LIT, false), 3);
+        }
+
+        if (hasRecipe) {
             increaseCraftingProgress();
-            if (!isLit) {
-                world.setBlockState(pos, state.with(PastryStationBlock.LIT, true), 3);
-                markDirty(world, pos, state);
-            }
+            markDirty(world, pos, state);
 
             if (hasCraftingFinished()) {
                 craftItem();
                 resetProgress();
             }
         } else {
-            if (isLit) {
-                world.setBlockState(pos, state.with(PastryStationBlock.LIT, false), 3);
-                resetProgress();
-            }
+            resetProgress();
         }
     }
 
 
     private void resetProgress() {
         this.progress = 0;
-        this.maxProgress = DEFAULT_MAX_PROGRESS;
+        this.maxProgress = 72;
     }
 
     private void craftItem() {
+        Optional<RecipeEntry<PastryStationRecipe>> recipe = getCurrentRecipe();
+
+        ItemStack output = recipe.get().value().output();
         this.removeStack(INPUT_SLOT, 1);
-        this.setStack(OUTPUT_SLOT, new ItemStack(ModItems.MUFFIN,
-                this.getStack(OUTPUT_SLOT).getCount() + 1));
+        this.setStack(OUTPUT_SLOT, new ItemStack(output.getItem(),
+                this.getStack(OUTPUT_SLOT).getCount() + output.getCount()));
     }
 
     private boolean hasCraftingFinished() {
@@ -143,18 +162,19 @@ public class PastryStationBlockEntity extends BlockEntity implements ExtendedScr
         this.progress++;
     }
 
-    private boolean canInsertIntoOutputSlot() {
-        return this.getStack(OUTPUT_SLOT).isEmpty() ||
-                this.getStack(OUTPUT_SLOT).getCount() < this.getStack(OUTPUT_SLOT).getMaxCount();
+    private boolean hasRecipe() {
+        Optional<RecipeEntry<PastryStationRecipe>> recipe = getCurrentRecipe();
+        if(recipe.isEmpty()) {
+            return false;
+        }
+
+        ItemStack output = recipe.get().value().output();
+        return canInsertAmountIntoOutputSlot(output.getCount()) && canInsertItemIntoOutputSlot(output);
     }
 
-    private boolean hasRecipe() {
-        ItemStack input = new ItemStack(ModItems.BLUEBERRIES);
-        ItemStack output = new ItemStack(ModItems.MUFFIN);
-
-        return this.getStack(INPUT_SLOT).getItem() == input.getItem() &&
-                canInsertAmountIntoOutputSlot(output.getCount()) &&
-                canInsertItemIntoOutputSlot(output);
+    private Optional<RecipeEntry<PastryStationRecipe>> getCurrentRecipe() {
+        return ((ServerWorld) this.getWorld()).getRecipeManager()
+                .getFirstMatch(ModRecipes.PASTRY_STATION_TYPE, new PastryStationRecipeInput(inventory.get(INPUT_SLOT)), this.getWorld());
     }
 
     private boolean canInsertItemIntoOutputSlot(ItemStack output) {
@@ -162,12 +182,20 @@ public class PastryStationBlockEntity extends BlockEntity implements ExtendedScr
     }
 
     private boolean canInsertAmountIntoOutputSlot(int count) {
-        return this.getStack(OUTPUT_SLOT).getMaxCount() >= this.getStack(OUTPUT_SLOT).getCount() + count;
+        int maxCount = this.getStack(OUTPUT_SLOT).isEmpty() ? 64 : this.getStack(OUTPUT_SLOT).getMaxCount();
+        int currentCount = this.getStack(OUTPUT_SLOT).getCount();
+
+        return maxCount >= currentCount + count;
     }
 
     @Nullable
     @Override
     public Packet<ClientPlayPacketListener> toUpdatePacket() {
         return BlockEntityUpdateS2CPacket.create(this);
+    }
+
+    @Override
+    public NbtCompound toInitialChunkDataNbt(RegistryWrapper.WrapperLookup registryLookup) {
+        return createNbt(registryLookup);
     }
 }

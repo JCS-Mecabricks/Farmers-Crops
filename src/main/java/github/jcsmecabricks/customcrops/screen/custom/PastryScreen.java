@@ -28,16 +28,6 @@ public class PastryScreen extends HandledScreen<PastryScreenHandler> {
         playerInventoryTitleY = 1000;
     }
 
-    @Override
-    protected void drawBackground(DrawContext context, float delta, int mouseX, int mouseY) {
-        RenderSystem.setShaderColor(1.0F, 1.0F, 1.0F, 1.0F);
-        int x = (width - backgroundWidth) / 2;
-        int y = (height - backgroundHeight) / 2;
-        context.drawTexture(RenderLayer::getGuiTextured, GUI_TEXTURE, x, y, 0.0F, 0.0F, this.backgroundWidth, this.backgroundHeight, 256, 256);
-        renderProgressArrow(context, x, y);
-        renderProgressFire(context, x, y);
-    }
-
     private void renderProgressFire(DrawContext context, int x, int y) {
         if(handler.isCrafting()) {
             context.drawTexture(RenderLayer::getGuiTextured, FIRE_TEXTURE,x + 107, y + 13 + 16 - handler.getScaledBurnProgress(), 0,
@@ -45,6 +35,15 @@ public class PastryScreen extends HandledScreen<PastryScreenHandler> {
         }
     }
 
+    @Override
+    protected void drawBackground(DrawContext context, float delta, int mouseX, int mouseY) {
+        int x = (width - backgroundWidth) / 2;
+        int y = (height - backgroundHeight) / 2;
+
+        context.drawTexture(RenderLayer::getGuiTextured, GUI_TEXTURE, x, y, 0, 0, backgroundWidth, backgroundHeight, 256, 256);
+        renderProgressFire(context, x, y);
+        renderProgressArrow(context, x, y);
+    }
 
     private void renderProgressArrow(DrawContext context, int x, int y) {
         if(handler.isCrafting()) {
@@ -55,7 +54,6 @@ public class PastryScreen extends HandledScreen<PastryScreenHandler> {
 
     @Override
     public void render(DrawContext context, int mouseX, int mouseY, float delta) {
-        renderBackground(context, mouseX, mouseY, delta);
         super.render(context, mouseX, mouseY, delta);
         drawMouseoverTooltip(context, mouseX, mouseY);
     }
