@@ -25,6 +25,8 @@ import net.minecraft.screen.PropertyDelegate;
 import net.minecraft.screen.ScreenHandler;
 import net.minecraft.server.network.ServerPlayerEntity;
 import net.minecraft.server.world.ServerWorld;
+import net.minecraft.storage.ReadView;
+import net.minecraft.storage.WriteView;
 import net.minecraft.text.Text;
 import net.minecraft.util.ItemScatterer;
 import net.minecraft.util.collection.DefaultedList;
@@ -99,19 +101,19 @@ public class PastryStationBlockEntity extends BlockEntity implements ExtendedScr
     }
 
     @Override
-    protected void writeNbt(NbtCompound nbt, RegistryWrapper.WrapperLookup registryLookup) {
-        super.writeNbt(nbt, registryLookup);
-        Inventories.writeNbt(nbt, inventory, registryLookup);
-        nbt.putInt("pastry_station.progress", progress);
-        nbt.putInt("pastry_station.max_progress", maxProgress);
+    protected void readData(ReadView view) {
+        super.readData(view);
+        Inventories.readData(view, inventory);
+        progress = view.getInt("pastry_station.progress", 0);
+        maxProgress = view.getInt("pastry_station.max_progress", 0);
     }
 
     @Override
-    protected void readNbt(NbtCompound nbt, RegistryWrapper.WrapperLookup registryLookup) {
-        Inventories.readNbt(nbt, inventory, registryLookup);
-        progress = nbt.getInt("pastry_station.progress").get();
-        maxProgress = nbt.getInt("pastry_station.max_progress").get();
-        super.readNbt(nbt, registryLookup);
+    protected void writeData(WriteView view) {
+        super.writeData(view);
+        Inventories.writeData(view, inventory);
+        view.putInt("pastry_station.progress", progress);
+        view.putInt("pastry_station.max_progress", maxProgress);
     }
 
     public void tick(World world, BlockPos pos, BlockState state) {

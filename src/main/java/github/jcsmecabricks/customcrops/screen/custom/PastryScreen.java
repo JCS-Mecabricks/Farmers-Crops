@@ -2,6 +2,7 @@ package github.jcsmecabricks.customcrops.screen.custom;
 
 import com.mojang.blaze3d.systems.RenderSystem;
 import github.jcsmecabricks.customcrops.CustomCrops;
+import net.minecraft.client.gl.RenderPipelines;
 import net.minecraft.client.gui.DrawContext;
 import net.minecraft.client.gui.screen.ingame.HandledScreen;
 import net.minecraft.client.render.RenderLayer;
@@ -30,7 +31,7 @@ public class PastryScreen extends HandledScreen<PastryScreenHandler> {
 
     private void renderProgressFire(DrawContext context, int x, int y) {
         if(handler.isCrafting()) {
-            context.drawTexture(RenderLayer::getGuiTextured, FIRE_TEXTURE,x + 107, y + 13 + 16 - handler.getScaledBurnProgress(), 0,
+            context.drawTexture(RenderPipelines.GUI_TEXTURED, FIRE_TEXTURE,x + 107, y + 13 + 16 - handler.getScaledBurnProgress(), 0,
                     16 - handler.getScaledBurnProgress(), 16, handler.getScaledBurnProgress(),16, 16);
         }
     }
@@ -40,14 +41,14 @@ public class PastryScreen extends HandledScreen<PastryScreenHandler> {
         int x = (width - backgroundWidth) / 2;
         int y = (height - backgroundHeight) / 2;
 
-        context.drawTexture(RenderLayer::getGuiTextured, GUI_TEXTURE, x, y, 0, 0, backgroundWidth, backgroundHeight, 256, 256);
+        context.drawTexture(RenderPipelines.GUI_TEXTURED, GUI_TEXTURE, x, y, 0, 0, backgroundWidth, backgroundHeight, 256, 256);
         renderProgressFire(context, x, y);
         renderProgressArrow(context, x, y);
     }
 
     private void renderProgressArrow(DrawContext context, int x, int y) {
         if(handler.isCrafting()) {
-            context.drawTexture(RenderLayer::getGuiTextured, ARROW_TEXTURE, x + 73, y + 35, 0, 0,
+            context.drawTexture(RenderPipelines.GUI_TEXTURED, ARROW_TEXTURE, x + 73, y + 35, 0, 0,
                     handler.getScaledArrowProgress(), 16, 24, 16);
         }
     }
