@@ -1,5 +1,4 @@
 <div align="center"><p>
-  ![icon](https://github.com/user-attachments/assets/59c60667-b19d-4c76-86b6-373092b1dfcd)
 
 This mod adds more crops and bushes to minecraft
 
