@@ -43,13 +43,12 @@ public class ModBlocks {
     public static final Block PASTRY_STATION = registerBlock("pastry_station", properties ->
             new PastryStationBlock(properties.strength(2f).requiresTool()));
 
-
-
     private static Block registerBlock(String name, Function<AbstractBlock.Settings, Block> function) {
         Block toRegister = function.apply(AbstractBlock.Settings.create().registryKey(RegistryKey.of(RegistryKeys.BLOCK, Identifier.of(CustomCrops.MOD_ID, name))));
         registerBlockItem(name, toRegister);
         return Registry.register(Registries.BLOCK, Identifier.of(CustomCrops.MOD_ID, name), toRegister);
     }
+
 
     public static <T extends Block> T register(String name, T block) {
         CustomCrops.LOGGER.info("Registering block and item for: {}", name);
