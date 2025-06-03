@@ -15,10 +15,10 @@ public class ModBlockTags extends FabricTagProvider.BlockTagProvider {
 
     @Override
     protected void configure(RegistryWrapper.WrapperLookup wrapperLookup) {
-//        getOrCreateTagBuilder(BlockTags.NEEDS_IRON_TOOL)
-//                .add(ModBlocks.PASTRY_STATION);
-//
-//        getOrCreateTagBuilder(BlockTags.PICKAXE_MINEABLE)
-//                .add(ModBlocks.PASTRY_STATION);
+        valueLookupBuilder(BlockTags.NEEDS_IRON_TOOL)
+                .add(ModBlocks.PASTRY_STATION);
+
+        valueLookupBuilder(BlockTags.PICKAXE_MINEABLE)
+                .add(ModBlocks.PASTRY_STATION);
     }
 }
