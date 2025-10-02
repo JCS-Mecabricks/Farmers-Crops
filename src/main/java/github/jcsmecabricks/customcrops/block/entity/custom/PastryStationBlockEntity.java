@@ -117,7 +117,7 @@ public class PastryStationBlockEntity extends BlockEntity implements ExtendedScr
     }
 
     public void tick(World world, BlockPos pos, BlockState state) {
-        if (world.isClient) return; // run only on server
+        if (world.isClient()) return; // run only on server
 
         boolean hasRecipe = hasRecipe();
         boolean isLit = state.get(PastryStationBlock.LIT);
