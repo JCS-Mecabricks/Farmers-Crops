@@ -1,7 +1,6 @@
 <div align="center"><p>
-  ![icon](https://github.com/user-attachments/assets/59c60667-b19d-4c76-86b6-373092b1dfcd)
 
-This mod adds more crops and bushes to minecraft
+Farmer's Crops is a mod that adds more varieties of food. It adds more bushes and crops to minecraft that can be baked into pastries.
 
 ![Screenshot 2024-12-22 183954](https://github.com/user-attachments/assets/d0d27c25-ed6f-409c-9bea-389e9b5d2a32)
 
