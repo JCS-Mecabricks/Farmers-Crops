@@ -30,13 +30,6 @@ public class ModRecipeProvider extends FabricRecipeProvider {
             public void generate() {
                 List<ItemConvertible> custom_crops = List.of(ModItems.CORN);
 
-                createShapeless(RecipeCategory.FOOD, ModItems.TOMATO_SEEDS)
-                        .input(Items.WHEAT_SEEDS)
-                        .input(Items.RED_DYE)
-                        .criterion(hasItem(Items.WHEAT_SEEDS), conditionsFromItem(Items.WHEAT_SEEDS))
-                        .criterion(hasItem(Items.RED_DYE), conditionsFromItem(Items.RED_DYE))
-                        .offerTo(exporter);
-
                 createShaped(RecipeCategory.FOOD, ModItems.BLACKBERRY_PIE)
                         .input('E', Items.BREAD)
                         .input('P', Items.PAPER)
@@ -57,13 +50,6 @@ public class ModRecipeProvider extends FabricRecipeProvider {
                         .pattern(" E ")
                         .criterion(hasItem(Items.BREAD), conditionsFromItem(Items.BREAD))
                         .criterion(hasItem(Items.FURNACE), conditionsFromItem(Items.FURNACE))
-                        .offerTo(exporter);
-
-                createShapeless(RecipeCategory.FOOD, ModItems.CORN_KERNEL)
-                        .input(Items.WHEAT_SEEDS)
-                        .input(Items.YELLOW_DYE)
-                        .criterion(hasItem(Items.WHEAT_SEEDS), conditionsFromItem(Items.WHEAT_SEEDS))
-                        .criterion(hasItem(Items.YELLOW_DYE), conditionsFromItem(Items.YELLOW_DYE))
                         .offerTo(exporter);
 
                 createShapeless(RecipeCategory.FOOD, ModItems.STRAWBERRY_LEMONADE, 3)

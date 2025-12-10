@@ -1,15 +1,11 @@
-// 1.21.4	-999999999-01-01T00:00:00	Custom Crops/Custom Crops Recipes
+// 1.21.11	-999999999-01-01T00:00:00	Custom Crops/Custom Crops Recipes
 6917bce93ddb9fc0e1b368b20d8416a5b334cdf7 data/custom-crops/advancement/recipes/food/blackberry_pie.json
-ec58c2cce9f056e49989d6a75af5fc87c827f81a data/custom-crops/advancement/recipes/food/corn_kernel.json
 988804e3b277dfc5bea88b557c81414eec27b140 data/custom-crops/advancement/recipes/food/corn_on_the_cob.json
-e4353f4ed5d28b520893d9d7350e6d7d81304e6a data/custom-crops/advancement/recipes/food/corn_on_the_cob_from_smelting_corn.json
+bac4022dcbfb09b6d240e39a95b6d7ee3950b05d data/custom-crops/advancement/recipes/food/corn_on_the_cob_from_smelting_corn.json
 fc02927787419813f4241e27dca7fece40b0f267 data/custom-crops/advancement/recipes/food/pastry_station.json
 2b59ba6517f693a8b4d83f9620e44661127f7800 data/custom-crops/advancement/recipes/food/strawberry_lemonade.json
-39fbf12a53297c033c01325554718fd099ebc690 data/custom-crops/advancement/recipes/food/tomato_seeds.json
 c6890a5b63efc96b085fe16e5c5d3716eb2f62e0 data/custom-crops/recipe/blackberry_pie.json
-079a3f49ed734e35e6dde84be1763319ecae3ecc data/custom-crops/recipe/corn_kernel.json
 df07b4c494ff3a9cc3b89d6a9aeee8bfbf71fe4b data/custom-crops/recipe/corn_on_the_cob.json
 4d0e7d64942f563e03fa1e8cd33b9af3f421bf7b data/custom-crops/recipe/corn_on_the_cob_from_smelting_corn.json
 84cb1890c8bcd42353b9acae44bb366b07ed93fb data/custom-crops/recipe/pastry_station.json
 da2c5820229b634c1a8cad74fa66235f72fbdc78 data/custom-crops/recipe/strawberry_lemonade.json
-961e176e3ca112ffff446d7ea59718c6bc32bfe2 data/custom-crops/recipe/tomato_seeds.json

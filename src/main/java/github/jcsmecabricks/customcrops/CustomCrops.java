@@ -6,6 +6,7 @@ import github.jcsmecabricks.customcrops.group.ModGroups;
 import github.jcsmecabricks.customcrops.item.ModItems;
 import github.jcsmecabricks.customcrops.recipe.ModRecipes;
 import github.jcsmecabricks.customcrops.screen.ModScreenHandlers;
+import github.jcsmecabricks.customcrops.util.ModLootTableModifiers;
 import github.jcsmecabricks.customcrops.world.gen.ModWorldGeneration;
 import net.fabricmc.api.ModInitializer;
 
@@ -25,6 +26,7 @@ public class CustomCrops implements ModInitializer {
 	public void onInitialize() {
 		ModBlocks.load();
 		ModItems.load();
+        ModLootTableModifiers.modifyLootTables();
 		ModRecipes.registerRecipes();
 		ModGroups.load();
 		ModBlockEntities.registerBlockEntities();
