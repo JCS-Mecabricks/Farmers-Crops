@@ -3,16 +3,14 @@ package github.jcsmecabricks.customcrops.item;
 import github.jcsmecabricks.customcrops.CustomCrops;
 import github.jcsmecabricks.customcrops.block.ModBlocks;
 import github.jcsmecabricks.customcrops.item.custom.StrawberryLemonadeItem;
-import net.minecraft.item.BlockItem;
-import net.minecraft.item.Item;
-import net.minecraft.item.Items;
-import net.minecraft.registry.Registries;
-import net.minecraft.registry.Registry;
-import net.minecraft.registry.RegistryKey;
-import net.minecraft.registry.RegistryKeys;
-import net.minecraft.util.Identifier;
-
 import java.util.function.Function;
+import net.minecraft.core.Registry;
+import net.minecraft.core.registries.BuiltInRegistries;
+import net.minecraft.core.registries.Registries;
+import net.minecraft.resources.Identifier;
+import net.minecraft.resources.ResourceKey;
+import net.minecraft.world.item.BlockItem;
+import net.minecraft.world.item.Item;
 
 public class ModItems {
 
@@ -60,22 +58,22 @@ public class ModItems {
 
     public static final Item STRAWBERRY_LEMONADE = registerItem("strawberry_lemonade", settings ->
             new StrawberryLemonadeItem(settings
-                    .maxCount(16)
+                    .stacksTo(16)
                     .food(ModFoodComponents.STRAWBERRY_LEMONADE_FOOD, ModFoodComponents.STRAWBERRY_LEMONADE)));
 
 
 
     public static <T extends Item> T register(String name, T item) {
-        return Registry.register(Registries.ITEM, CustomCrops.id(name), item);
+        return Registry.register(BuiltInRegistries.ITEM, CustomCrops.id(name), item);
     }
 
-    private static Item registerItem(String name, Function<Item.Settings, Item> function) {
-        return Registry.register(Registries.ITEM, Identifier.of(CustomCrops.MOD_ID, name),
-                function.apply(new Item.Settings().registryKey(RegistryKey.of(RegistryKeys.ITEM, Identifier.of(CustomCrops.MOD_ID, name)))));
+    private static Item registerItem(String name, Function<Item.Properties, Item> function) {
+        return Registry.register(BuiltInRegistries.ITEM, Identifier.fromNamespaceAndPath(CustomCrops.MOD_ID, name),
+                function.apply(new Item.Properties().setId(ResourceKey.create(Registries.ITEM, Identifier.fromNamespaceAndPath(CustomCrops.MOD_ID, name)))));
     }
 
     private static Item registerItem(String name, Item item) {
-        return Registry.register(Registries.ITEM, Identifier.of(CustomCrops.MOD_ID, name), item);
+        return Registry.register(BuiltInRegistries.ITEM, Identifier.fromNamespaceAndPath(CustomCrops.MOD_ID, name), item);
     }
 
     public static void load() {}

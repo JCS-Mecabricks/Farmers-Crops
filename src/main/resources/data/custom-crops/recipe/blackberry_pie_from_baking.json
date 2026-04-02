@@ -1,8 +1,5 @@
 {
   "type": "custom-crops:baking",
-  "category": "food",
   "ingredient": "custom-crops:blackberries",
-  "result": {
-    "id": "custom-crops:blackberry_pie"
-  }
+  "result": "custom-crops:blackberry_pie"
 }

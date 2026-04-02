@@ -10,11 +10,11 @@ import github.jcsmecabricks.customcrops.util.ModLootTableModifiers;
 import github.jcsmecabricks.customcrops.world.gen.ModWorldGeneration;
 import net.fabricmc.api.ModInitializer;
 
-import net.fabricmc.fabric.api.itemgroup.v1.ItemGroupEvents;
-import net.fabricmc.fabric.api.registry.CompostingChanceRegistry;
-import net.minecraft.item.ItemGroups;
-import net.minecraft.item.Items;
-import net.minecraft.util.Identifier;
+import net.fabricmc.fabric.api.creativetab.v1.CreativeModeTabEvents;
+import net.fabricmc.fabric.api.registry.CompostableRegistry;
+import net.minecraft.resources.Identifier;
+import net.minecraft.world.item.CreativeModeTabs;
+import net.minecraft.world.item.Items;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -24,30 +24,30 @@ public class CustomCrops implements ModInitializer {
 
 	@Override
 	public void onInitialize() {
+        ModItems.load();
 		ModBlocks.load();
-		ModItems.load();
+        ModRecipes.registerRecipes();
         ModLootTableModifiers.modifyLootTables();
-		ModRecipes.registerRecipes();
 		ModGroups.load();
 		ModBlockEntities.registerBlockEntities();
 		ModScreenHandlers.registerScreenHandlers();
 		ModWorldGeneration.generateModWorldGen();
 		LOGGER.info("Loading...");
-		CompostingChanceRegistry.INSTANCE.add(ModItems.BLUEBERRIES, 0.30f);
-		CompostingChanceRegistry.INSTANCE.add(ModItems.TOMATO, 0.50f);
-		CompostingChanceRegistry.INSTANCE.add(ModItems.CORN, 0.50f);
-		CompostingChanceRegistry.INSTANCE.add(ModItems.CORN_KERNEL, 0.40f);
-		CompostingChanceRegistry.INSTANCE.add(ModItems.TOMATO_SEEDS, 0.40f);
-		CompostingChanceRegistry.INSTANCE.add(ModItems.STRAWBERRIES, 0.30f);
-		CompostingChanceRegistry.INSTANCE.add(ModItems.BLACKBERRIES, 0.30f);
+        CompostableRegistry.INSTANCE.add(ModItems.BLUEBERRIES, 0.30f);
+		CompostableRegistry.INSTANCE.add(ModItems.TOMATO, 0.50f);
+        CompostableRegistry.INSTANCE.add(ModItems.CORN, 0.50f);
+        CompostableRegistry.INSTANCE.add(ModItems.CORN_KERNEL, 0.40f);
+        CompostableRegistry.INSTANCE.add(ModItems.TOMATO_SEEDS, 0.40f);
+        CompostableRegistry.INSTANCE.add(ModItems.STRAWBERRIES, 0.30f);
+        CompostableRegistry.INSTANCE.add(ModItems.BLACKBERRIES, 0.30f);
 
-		ItemGroupEvents.modifyEntriesEvent(ItemGroups.FOOD_AND_DRINK).register(entries -> {
-			entries.addAfter(Items.BEETROOT, ModItems.STRAWBERRIES);
-			entries.addAfter(ModItems.STRAWBERRIES, ModItems.BLUEBERRIES);
-			entries.addAfter(ModItems.BLUEBERRIES, ModItems.BLACKBERRIES);
+		CreativeModeTabEvents.modifyOutputEvent(CreativeModeTabs.FOOD_AND_DRINKS).register(entries -> {
+			entries.insertAfter(Items.BEETROOT, ModItems.STRAWBERRIES);
+			entries.insertAfter(ModItems.STRAWBERRIES, ModItems.BLUEBERRIES);
+			entries.insertAfter(ModItems.BLUEBERRIES, ModItems.BLACKBERRIES);
 		});
 	}
 	public static Identifier id(String path) {
-		return Identifier.of(MOD_ID, path);
+		return Identifier.fromNamespaceAndPath(MOD_ID, path);
 	}
 }

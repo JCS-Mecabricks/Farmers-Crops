@@ -2,70 +2,72 @@ package github.jcsmecabricks.customcrops.datagen;
 
 import github.jcsmecabricks.customcrops.block.ModBlocks;
 import github.jcsmecabricks.customcrops.item.ModItems;
-import net.fabricmc.fabric.api.datagen.v1.FabricDataOutput;
+import net.fabricmc.fabric.api.datagen.v1.FabricPackOutput;
 import net.fabricmc.fabric.api.datagen.v1.provider.FabricRecipeProvider;
-import net.minecraft.data.recipe.CookingRecipeJsonBuilder;
-import net.minecraft.data.recipe.RecipeExporter;
-import net.minecraft.data.recipe.RecipeGenerator;
-import net.minecraft.item.Item;
-import net.minecraft.item.ItemConvertible;
-import net.minecraft.item.Items;
-import net.minecraft.recipe.Ingredient;
-import net.minecraft.recipe.book.RecipeCategory;
-import net.minecraft.registry.RegistryWrapper;
-import net.minecraft.registry.tag.TagKey;
-
+import net.minecraft.core.HolderLookup;
+import net.minecraft.data.recipes.RecipeCategory;
+import net.minecraft.data.recipes.RecipeOutput;
+import net.minecraft.data.recipes.RecipeProvider;
+import net.minecraft.data.recipes.SimpleCookingRecipeBuilder;
+import net.minecraft.tags.TagKey;
+import net.minecraft.world.item.Item;
+import net.minecraft.world.item.Items;
+import net.minecraft.world.item.crafting.CookingBookCategory;
+import net.minecraft.world.item.crafting.Ingredient;
+import net.minecraft.world.item.crafting.RecipeBookCategories;
+import net.minecraft.world.level.ItemLike;
 import java.util.List;
 import java.util.concurrent.CompletableFuture;
 
 public class ModRecipeProvider extends FabricRecipeProvider {
-    public ModRecipeProvider(FabricDataOutput output, CompletableFuture<RegistryWrapper.WrapperLookup> registriesFuture) {
+    public ModRecipeProvider(FabricPackOutput output, CompletableFuture<HolderLookup.Provider> registriesFuture) {
         super(output, registriesFuture);
     }
 
     @Override
-    protected RecipeGenerator getRecipeGenerator(RegistryWrapper.WrapperLookup wrapperLookup, RecipeExporter recipeExporter) {
-        return new RecipeGenerator(wrapperLookup, recipeExporter) {
+    protected RecipeProvider createRecipeProvider(HolderLookup.Provider wrapperLookup, RecipeOutput recipeExporter) {
+        return new RecipeProvider(wrapperLookup, recipeExporter) {
             @Override
-            public void generate() {
-                List<ItemConvertible> custom_crops = List.of(ModItems.CORN);
+            public void buildRecipes() {
+                List<ItemLike> custom_crops = List.of(ModItems.CORN);
 
-                createShaped(RecipeCategory.FOOD, ModItems.BLACKBERRY_PIE)
-                        .input('E', Items.BREAD)
-                        .input('P', Items.PAPER)
-                        .input('A', ModItems.BLACKBERRIES)
+                shaped(RecipeCategory.FOOD, ModItems.BLACKBERRY_PIE)
+                        .define('E', Items.BREAD)
+                        .define('P', Items.PAPER)
+                        .define('A', ModItems.BLACKBERRIES)
                         .pattern(" E ")
                         .pattern("EAE")
                         .pattern("PPP")
-                        .criterion(hasItem(ModItems.BLACKBERRIES), conditionsFromItem(ModItems.BLACKBERRIES))
-                        .criterion(hasItem(Items.BREAD), conditionsFromItem(Items.BREAD))
-                        .criterion(hasItem(Items.PAPER), conditionsFromItem(Items.PAPER))
-                        .offerTo(exporter);
+                        .unlockedBy(getHasName(ModItems.BLACKBERRIES), has(ModItems.BLACKBERRIES))
+                        .unlockedBy(getHasName(Items.BREAD), has(Items.BREAD))
+                        .unlockedBy(getHasName(Items.PAPER), has(Items.PAPER))
+                        .save(output);
 
-                createShaped(RecipeCategory.FOOD, ModBlocks.PASTRY_STATION)
-                        .input('E', Items.BREAD)
-                        .input('P', Items.FURNACE)
+                shaped(RecipeCategory.FOOD, ModBlocks.PASTRY_STATION)
+                        .define('E', Items.BREAD)
+                        .define('P', Items.FURNACE)
                         .pattern(" E ")
                         .pattern("EPE")
                         .pattern(" E ")
-                        .criterion(hasItem(Items.BREAD), conditionsFromItem(Items.BREAD))
-                        .criterion(hasItem(Items.FURNACE), conditionsFromItem(Items.FURNACE))
-                        .offerTo(exporter);
+                        .unlockedBy(getHasName(Items.BREAD), has(Items.BREAD))
+                        .unlockedBy(getHasName(Items.FURNACE), has(Items.FURNACE))
+                        .save(output);
 
-                createShapeless(RecipeCategory.FOOD, ModItems.STRAWBERRY_LEMONADE, 3)
-                        .input(ModItems.STRAWBERRIES)
-                        .input(Items.GLASS_BOTTLE)
-                        .criterion(hasItem(ModItems.STRAWBERRIES), conditionsFromItem(ModItems.STRAWBERRIES))
-                        .criterion(hasItem(Items.GLASS_BOTTLE), conditionsFromItem(Items.GLASS_BOTTLE))
-                        .offerTo(exporter);
+                shapeless(RecipeCategory.FOOD, ModItems.STRAWBERRY_LEMONADE, 3)
+                        .requires(ModItems.STRAWBERRIES)
+                        .requires(Items.GLASS_BOTTLE)
+                        .unlockedBy(getHasName(ModItems.STRAWBERRIES), has(ModItems.STRAWBERRIES))
+                        .unlockedBy(getHasName(Items.GLASS_BOTTLE), has(Items.GLASS_BOTTLE))
+                        .save(output);
 
-                CookingRecipeJsonBuilder.createSmoking(Ingredient.ofItem(ModItems.CORN),
+                SimpleCookingRecipeBuilder.smoking(Ingredient.of(ModItems.CORN),
                         RecipeCategory.FOOD, ModItems.CORN_ON_THE_COB,
-                        0.40F, 200).criterion("has_corn",
-                        this.conditionsFromItem(ModItems.CORN)).offerTo(this.exporter);
+                        0.40F, 200).unlockedBy("has_corn",
+                        this.has(ModItems.CORN)).save(this.output);
 
-                offerSmelting(custom_crops,
+                oreSmelting(custom_crops,
                         RecipeCategory.FOOD,
+                        CookingBookCategory.FOOD,
                         ModItems.CORN_ON_THE_COB,
                         0.3f,
                         200,
@@ -74,7 +76,7 @@ public class ModRecipeProvider extends FabricRecipeProvider {
             }
 
             private static String hasTag(TagKey<Item> tag) {
-                return "has_" + tag.id().toString();
+                return "has_" + tag.location().toString();
             }
         };
     }

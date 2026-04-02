@@ -2,17 +2,17 @@ package github.jcsmecabricks.customcrops.screen;
 
 import github.jcsmecabricks.customcrops.CustomCrops;
 import github.jcsmecabricks.customcrops.screen.custom.PastryScreenHandler;
-import net.fabricmc.fabric.api.screenhandler.v1.ExtendedScreenHandlerType;
-import net.minecraft.registry.Registries;
-import net.minecraft.registry.Registry;
-import net.minecraft.screen.ScreenHandlerType;
-import net.minecraft.util.Identifier;
-import net.minecraft.util.math.BlockPos;
+import net.fabricmc.fabric.api.menu.v1.ExtendedMenuType;
+import net.minecraft.core.BlockPos;
+import net.minecraft.core.Registry;
+import net.minecraft.core.registries.BuiltInRegistries;
+import net.minecraft.resources.Identifier;
+import net.minecraft.world.inventory.MenuType;
 
 public class ModScreenHandlers {
-    public static final ScreenHandlerType<PastryScreenHandler> PASTRY_STATION_SCREEN_HANDLER =
-            Registry.register(Registries.SCREEN_HANDLER, Identifier.of(CustomCrops.MOD_ID, "pastry_station_screen_handler"),
-                    new ExtendedScreenHandlerType<>(PastryScreenHandler::new, BlockPos.PACKET_CODEC));
+    public static final MenuType<PastryScreenHandler> PASTRY_STATION_SCREEN_HANDLER =
+            Registry.register(BuiltInRegistries.MENU, Identifier.fromNamespaceAndPath(CustomCrops.MOD_ID, "pastry_station_screen_handler"),
+                    new ExtendedMenuType<>(PastryScreenHandler::new, BlockPos.STREAM_CODEC));
 
     public static void registerScreenHandlers() {
         CustomCrops.LOGGER.info("Registering Screen Handlers for " + CustomCrops.MOD_ID);

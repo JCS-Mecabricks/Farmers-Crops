@@ -8,47 +8,47 @@ import github.jcsmecabricks.customcrops.recipe.ModRecipes;
 import github.jcsmecabricks.customcrops.recipe.PastryStationRecipe;
 import github.jcsmecabricks.customcrops.recipe.PastryStationRecipeInput;
 import github.jcsmecabricks.customcrops.screen.custom.PastryScreenHandler;
-import net.fabricmc.fabric.api.screenhandler.v1.ExtendedScreenHandlerFactory;
-import net.minecraft.block.BlockState;
-import net.minecraft.block.entity.BlockEntity;
-import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.entity.player.PlayerInventory;
-import net.minecraft.inventory.Inventories;
-import net.minecraft.item.ItemStack;
-import net.minecraft.nbt.NbtCompound;
-import net.minecraft.network.listener.ClientPlayPacketListener;
-import net.minecraft.network.packet.Packet;
-import net.minecraft.network.packet.s2c.play.BlockEntityUpdateS2CPacket;
-import net.minecraft.recipe.RecipeEntry;
-import net.minecraft.registry.RegistryWrapper;
-import net.minecraft.screen.PropertyDelegate;
-import net.minecraft.screen.ScreenHandler;
-import net.minecraft.server.network.ServerPlayerEntity;
-import net.minecraft.server.world.ServerWorld;
-import net.minecraft.storage.ReadView;
-import net.minecraft.storage.WriteView;
-import net.minecraft.text.Text;
-import net.minecraft.util.ItemScatterer;
-import net.minecraft.util.collection.DefaultedList;
-import net.minecraft.util.math.BlockPos;
-import net.minecraft.world.World;
+import net.fabricmc.fabric.api.menu.v1.ExtendedMenuProvider;
+import net.minecraft.core.BlockPos;
+import net.minecraft.core.HolderLookup;
+import net.minecraft.core.NonNullList;
+import net.minecraft.nbt.CompoundTag;
+import net.minecraft.network.chat.Component;
+import net.minecraft.network.protocol.Packet;
+import net.minecraft.network.protocol.game.ClientGamePacketListener;
+import net.minecraft.network.protocol.game.ClientboundBlockEntityDataPacket;
+import net.minecraft.server.level.ServerLevel;
+import net.minecraft.server.level.ServerPlayer;
+import net.minecraft.world.ContainerHelper;
+import net.minecraft.world.Containers;
+import net.minecraft.world.entity.player.Inventory;
+import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.inventory.AbstractContainerMenu;
+import net.minecraft.world.inventory.ContainerData;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.crafting.RecipeHolder;
+import net.minecraft.world.level.Level;
+import net.minecraft.world.level.block.entity.BlockEntity;
+import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.level.storage.ValueInput;
+import net.minecraft.world.level.storage.ValueOutput;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.Optional;
 
-public class PastryStationBlockEntity extends BlockEntity implements ExtendedScreenHandlerFactory<BlockPos>, ImplementedInventory {
-    private final DefaultedList<ItemStack> inventory = DefaultedList.ofSize(2, ItemStack.EMPTY);
+public class PastryStationBlockEntity extends BlockEntity implements ExtendedMenuProvider<BlockPos>, ImplementedInventory {
+    private final NonNullList<ItemStack> inventory = NonNullList.withSize(2, ItemStack.EMPTY);
 
     private static final int INPUT_SLOT = 0;
     private static final int OUTPUT_SLOT = 1;
 
-    protected final PropertyDelegate propertyDelegate;
+    protected final ContainerData propertyDelegate;
     private int progress = 0;
     private int maxProgress = 72;
 
     public PastryStationBlockEntity(BlockPos pos, BlockState state) {
         super(ModBlockEntities.PASTRY_BE, pos, state);
-        this.propertyDelegate = new PropertyDelegate() {
+        this.propertyDelegate = new ContainerData() {
             @Override
             public int get(int index) {
                 return switch (index) {
@@ -67,70 +67,70 @@ public class PastryStationBlockEntity extends BlockEntity implements ExtendedScr
             }
 
             @Override
-            public int size() {
+            public int getCount() {
                 return 2;
             }
         };
     }
 
     @Override
-    public BlockPos getScreenOpeningData(ServerPlayerEntity player) {
-        return this.pos;
+    public BlockPos getScreenOpeningData(ServerPlayer player) {
+        return this.worldPosition;
     }
 
     @Override
-    public DefaultedList<ItemStack> getItems() {
+    public NonNullList<ItemStack> getItems() {
         return inventory;
     }
 
     @Override
-    public Text getDisplayName() {
-        return Text.translatable("gui.custom-crops.pastry_station");
+    public Component getDisplayName() {
+        return Component.translatable("gui.custom-crops.pastry_station");
     }
 
     @Nullable
     @Override
-    public ScreenHandler createMenu(int syncId, PlayerInventory playerInventory, PlayerEntity player) {
+    public AbstractContainerMenu createMenu(int syncId, Inventory playerInventory, Player player) {
         return new PastryScreenHandler(syncId, playerInventory, this, this.propertyDelegate);
     }
 
     @Override
-    public void onBlockReplaced(BlockPos pos, BlockState oldState) {
-        ItemScatterer.spawn(world, pos, (this));
-        super.onBlockReplaced(pos, oldState);
+    public void preRemoveSideEffects(BlockPos pos, BlockState oldState) {
+        Containers.dropContents(level, pos, (this));
+        super.preRemoveSideEffects(pos, oldState);
     }
 
     @Override
-    protected void readData(ReadView view) {
-        super.readData(view);
-        Inventories.readData(view, inventory);
-        progress = view.getInt("pastry_station.progress", 0);
-        maxProgress = view.getInt("pastry_station.max_progress", 0);
+    protected void loadAdditional(ValueInput view) {
+        super.loadAdditional(view);
+        ContainerHelper.loadAllItems(view, inventory);
+        progress = view.getIntOr("pastry_station.progress", 0);
+        maxProgress = view.getIntOr("pastry_station.max_progress", 0);
     }
 
     @Override
-    protected void writeData(WriteView view) {
-        super.writeData(view);
-        Inventories.writeData(view, inventory);
+    protected void saveAdditional(ValueOutput view) {
+        super.saveAdditional(view);
+        ContainerHelper.saveAllItems(view, inventory);
         view.putInt("pastry_station.progress", progress);
         view.putInt("pastry_station.max_progress", maxProgress);
     }
 
-    public void tick(World world, BlockPos pos, BlockState state) {
-        if (world.isClient()) return; // run only on server
+    public void tick(Level world, BlockPos pos, BlockState state) {
+        if (world.isClientSide()) return; // run only on server
 
         boolean hasRecipe = hasRecipe();
-        boolean isLit = state.get(PastryStationBlock.LIT);
+        boolean isLit = state.getValue(PastryStationBlock.LIT);
 
         if (hasRecipe && !isLit) {
-            world.setBlockState(pos, state.with(PastryStationBlock.LIT, true), 3);
+            world.setBlock(pos, state.setValue(PastryStationBlock.LIT, true), 3);
         } else if (!hasRecipe && isLit) {
-            world.setBlockState(pos, state.with(PastryStationBlock.LIT, false), 3);
+            world.setBlock(pos, state.setValue(PastryStationBlock.LIT, false), 3);
         }
 
         if (hasRecipe) {
             increaseCraftingProgress();
-            markDirty(world, pos, state);
+            setChanged(world, pos, state);
 
             if (hasCraftingFinished()) {
                 craftItem();
@@ -148,12 +148,20 @@ public class PastryStationBlockEntity extends BlockEntity implements ExtendedScr
     }
 
     private void craftItem() {
-        Optional<RecipeEntry<PastryStationRecipe>> recipe = getCurrentRecipe();
+        Optional<RecipeHolder<PastryStationRecipe>> recipe = getCurrentRecipe();
 
-        ItemStack output = recipe.get().value().output();
-        this.removeStack(INPUT_SLOT, 1);
-        this.setStack(OUTPUT_SLOT, new ItemStack(output.getItem(),
-                this.getStack(OUTPUT_SLOT).getCount() + output.getCount()));
+        if (recipe.isEmpty()) return;
+
+        PastryStationRecipe r = recipe.get().value();
+
+        ItemStack output = new ItemStack(r.resultItem());
+
+        this.removeItem(INPUT_SLOT, 1);
+
+        this.setItem(OUTPUT_SLOT, new ItemStack(
+                output.getItem(),
+                this.getItem(OUTPUT_SLOT).getCount() + output.getCount()
+        ));
     }
 
     private boolean hasCraftingFinished() {
@@ -165,39 +173,41 @@ public class PastryStationBlockEntity extends BlockEntity implements ExtendedScr
     }
 
     private boolean hasRecipe() {
-        Optional<RecipeEntry<PastryStationRecipe>> recipe = getCurrentRecipe();
+        Optional<RecipeHolder<PastryStationRecipe>> recipe = getCurrentRecipe();
         if(recipe.isEmpty()) {
             return false;
         }
 
-        ItemStack output = recipe.get().value().output();
+        PastryStationRecipe r = recipe.get().value();
+
+        ItemStack output = new ItemStack(r.resultItem());
         return canInsertAmountIntoOutputSlot(output.getCount()) && canInsertItemIntoOutputSlot(output);
     }
 
-    private Optional<RecipeEntry<PastryStationRecipe>> getCurrentRecipe() {
-        return ((ServerWorld) this.getWorld()).getRecipeManager()
-                .getFirstMatch(ModRecipes.PASTRY_STATION_TYPE, new PastryStationRecipeInput(inventory.get(INPUT_SLOT)), this.getWorld());
+    private Optional<RecipeHolder<PastryStationRecipe>> getCurrentRecipe() {
+        return ((ServerLevel) this.getLevel()).recipeAccess()
+                .getRecipeFor(ModRecipes.PASTRY_STATION_TYPE, new PastryStationRecipeInput(inventory.get(INPUT_SLOT)), this.getLevel());
     }
 
     private boolean canInsertItemIntoOutputSlot(ItemStack output) {
-        return this.getStack(OUTPUT_SLOT).isEmpty() || this.getStack(OUTPUT_SLOT).getItem() == output.getItem();
+        return this.getItem(OUTPUT_SLOT).isEmpty() || this.getItem(OUTPUT_SLOT).getItem() == output.getItem();
     }
 
     private boolean canInsertAmountIntoOutputSlot(int count) {
-        int maxCount = this.getStack(OUTPUT_SLOT).isEmpty() ? 64 : this.getStack(OUTPUT_SLOT).getMaxCount();
-        int currentCount = this.getStack(OUTPUT_SLOT).getCount();
+        int maxCount = this.getItem(OUTPUT_SLOT).isEmpty() ? 64 : this.getItem(OUTPUT_SLOT).getMaxStackSize();
+        int currentCount = this.getItem(OUTPUT_SLOT).getCount();
 
         return maxCount >= currentCount + count;
     }
 
     @Nullable
     @Override
-    public Packet<ClientPlayPacketListener> toUpdatePacket() {
-        return BlockEntityUpdateS2CPacket.create(this);
+    public Packet<ClientGamePacketListener> getUpdatePacket() {
+        return ClientboundBlockEntityDataPacket.create(this);
     }
 
     @Override
-    public NbtCompound toInitialChunkDataNbt(RegistryWrapper.WrapperLookup registryLookup) {
-        return createNbt(registryLookup);
+    public CompoundTag getUpdateTag(HolderLookup.Provider registryLookup) {
+        return saveWithoutMetadata(registryLookup);
     }
 }

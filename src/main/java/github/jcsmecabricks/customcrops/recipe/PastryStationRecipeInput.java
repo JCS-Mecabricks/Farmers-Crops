@@ -1,11 +1,11 @@
 package github.jcsmecabricks.customcrops.recipe;
 
-import net.minecraft.item.ItemStack;
-import net.minecraft.recipe.input.RecipeInput;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.crafting.RecipeInput;
 
 public record PastryStationRecipeInput(ItemStack input) implements RecipeInput {
     @Override
-    public ItemStack getStackInSlot(int slot) {
+    public ItemStack getItem(int slot) {
         return input;
     }
 
