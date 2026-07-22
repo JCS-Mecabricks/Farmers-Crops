@@ -25,13 +25,14 @@ public class ModConfiguredFeatures {
     public static final ResourceKey<ConfiguredFeature<?, ?>> BLACKBERRY_BUSH_KEY = registerKey("blackberry_bush");
 
     public static void bootstrap(BootstrapContext<ConfiguredFeature<?, ?>> context) {
+        var blocks = context.lookup(Registries.BLOCK);
         Holder<PlacedFeature> blueberryPlaced = context.lookup(Registries.PLACED_FEATURE).getOrThrow(ModPlacedFeatures.BLUEBERRY_BUSH_PLACED_KEY);
         Holder<PlacedFeature> strawberryPlaced = context.lookup(Registries.PLACED_FEATURE).getOrThrow(ModPlacedFeatures.STRAWBERRY_BUSH_PLACED_KEY);
         Holder<PlacedFeature> blackberryPlaced = context.lookup(Registries.PLACED_FEATURE).getOrThrow(ModPlacedFeatures.BLUEBERRY_BUSH_PLACED_KEY);
         // Blueberry Bush
         register(context, BLUEBERRY_BUSH_KEY, Feature.VEGETATION_PATCH,
                 new VegetationPatchConfiguration(
-                        BlockTags.LEAVES, // replaceable
+                        blocks.getOrThrow(BlockTags.LEAVES), // replaceable
                         BlockStateProvider.simple(ModBlocks.BLUEBERRY_BUSH.defaultBlockState()
                                 .setValue(SweetBerryBushBlock.AGE, 3)),
                         blueberryPlaced,
@@ -48,7 +49,7 @@ public class ModConfiguredFeatures {
         // Strawberry Bush
         register(context, STRAWBERRY_BUSH_KEY, Feature.VEGETATION_PATCH,
                 new VegetationPatchConfiguration(
-                        BlockTags.LEAVES,
+                        blocks.getOrThrow(BlockTags.LEAVES),
                         BlockStateProvider.simple(ModBlocks.STRAWBERRY_BUSH.defaultBlockState()
                                 .setValue(SweetBerryBushBlock.AGE, 3)),
                         strawberryPlaced,
@@ -65,7 +66,7 @@ public class ModConfiguredFeatures {
         // Blackberry Bush
         register(context, BLACKBERRY_BUSH_KEY, Feature.VEGETATION_PATCH,
                 new VegetationPatchConfiguration(
-                        BlockTags.LEAVES,
+                        blocks.getOrThrow(BlockTags.LEAVES),
                         BlockStateProvider.simple(ModBlocks.BLACKBERRY_BUSH.defaultBlockState()
                                 .setValue(SweetBerryBushBlock.AGE, 3)),
                         blackberryPlaced,

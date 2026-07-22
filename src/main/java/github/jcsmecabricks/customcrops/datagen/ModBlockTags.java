@@ -14,10 +14,10 @@ public class ModBlockTags extends FabricTagsProvider.BlockTagsProvider {
 
     @Override
     protected void addTags(HolderLookup.Provider wrapperLookup) {
-        valueLookupBuilder(BlockTags.NEEDS_IRON_TOOL)
-                .add(ModBlocks.PASTRY_STATION);
+        tag(BlockTags.NEEDS_IRON_TOOL)
+                .add(ModBlocks.getRK(ModBlocks.PASTRY_STATION));
 
-        valueLookupBuilder(BlockTags.MINEABLE_WITH_PICKAXE)
-                .add(ModBlocks.PASTRY_STATION);
+        tag(BlockTags.MINEABLE_WITH_PICKAXE)
+                .add(ModBlocks.getRK(ModBlocks.PASTRY_STATION));
     }
 }
