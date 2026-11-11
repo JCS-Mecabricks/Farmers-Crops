@@ -1,5 +1,6 @@
 package github.jcsmecabricks.customcrops.item.custom;
 
+import net.minecraft.util.Prediction;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.Item;
@@ -18,7 +19,7 @@ public class StrawberryLemonadeItem extends Item {
         if (user instanceof Player player) {
             if (!player.getInventory().add(new ItemStack(Items.GLASS_BOTTLE))) {
                 // Drop the coffee cup if inventory is full
-                player.drop(new ItemStack(Items.GLASS_BOTTLE), false);
+                player.drop(new ItemStack(Items.GLASS_BOTTLE), false, Prediction.PREDICTED);
             }
         }
         // Reduce the consumed item by 1

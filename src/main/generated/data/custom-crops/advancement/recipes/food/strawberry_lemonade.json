@@ -23,7 +23,7 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "custom-crops:strawberry_lemonade"
+        "recipes": "custom-crops:strawberry_lemonade"
       },
       "trigger": "minecraft:recipe_unlocked"
     }

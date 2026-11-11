@@ -13,7 +13,7 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "custom-crops:corn_on_the_cob"
+        "recipes": "custom-crops:corn_on_the_cob"
       },
       "trigger": "minecraft:recipe_unlocked"
     }

@@ -1,7 +1,7 @@
-// 1.21.11	-999999999-01-01T00:00:00	Custom Crops/Block Loot Tables
-eae94ef1dfb7c4561d47a25c0bc4a29ffcb21720 data/custom-crops/loot_table/blocks/blackberry_bush.json
-08b22f85725b8a0a22cb869ca2ad7e8a06f63b0e data/custom-crops/loot_table/blocks/blueberry_bush.json
-aa5247711dd6ff05fafa9dc412e55451ec2f9a8b data/custom-crops/loot_table/blocks/corn_crop.json
-4b50d8f4bd3d2fa49efe9af3824bbb4d44a663a0 data/custom-crops/loot_table/blocks/pastry_station.json
-c4c3c361d8ef3f2c5b0c584f5964c9e39b0aae72 data/custom-crops/loot_table/blocks/strawberry_bush.json
-91f2ee2101cd3a9d9d8fe35bfd5cea00aa22f62f data/custom-crops/loot_table/blocks/tomato_crop.json
+// 26.3	-999999999-01-01T00:00:00	Custom Crops/Block Loot Tables
+97b46dda4addd40a33386e540ca481b0f4f4c8d8 data/custom-crops/loot_table/blocks/blackberry_bush.json
+3f64bee63cc62e92b6cd5cc8f6bbea56acc66a59 data/custom-crops/loot_table/blocks/blueberry_bush.json
+1a31824d7304e8b831e6e8197aaaa9ebad9a81d5 data/custom-crops/loot_table/blocks/corn_crop.json
+5226afc99d6804d5417fb9ee4450d986e8cd53c1 data/custom-crops/loot_table/blocks/pastry_station.json
+339e805d3776dbbfb10224a0592a084d3e3ec499 data/custom-crops/loot_table/blocks/strawberry_bush.json
+87ffaac61422b41f7260db0b0f444d44ac5a0ef7 data/custom-crops/loot_table/blocks/tomato_crop.json

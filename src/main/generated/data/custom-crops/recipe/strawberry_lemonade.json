@@ -1,6 +1,5 @@
 {
   "type": "minecraft:crafting_shapeless",
-  "category": "misc",
   "ingredients": [
     "custom-crops:strawberries",
     "minecraft:glass_bottle"

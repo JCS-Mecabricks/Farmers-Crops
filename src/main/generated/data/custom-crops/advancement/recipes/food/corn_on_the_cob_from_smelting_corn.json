@@ -13,7 +13,7 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "custom-crops:corn_on_the_cob_from_smelting_corn"
+        "recipes": "custom-crops:corn_on_the_cob_from_smelting_corn"
       },
       "trigger": "minecraft:recipe_unlocked"
     }

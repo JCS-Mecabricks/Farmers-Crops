@@ -33,7 +33,7 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "custom-crops:blackberry_pie"
+        "recipes": "custom-crops:blackberry_pie"
       },
       "trigger": "minecraft:recipe_unlocked"
     }

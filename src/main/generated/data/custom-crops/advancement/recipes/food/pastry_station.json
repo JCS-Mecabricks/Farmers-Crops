@@ -23,7 +23,7 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "custom-crops:pastry_station"
+        "recipes": "custom-crops:pastry_station"
       },
       "trigger": "minecraft:recipe_unlocked"
     }

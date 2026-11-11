@@ -1,0 +1,15 @@
+{
+  "type": "minecraft:simple_random_selector",
+  "features": {
+    "feature": {
+      "type": "minecraft:simple_block",
+      "to_place": {
+        "id": "custom-crops:blueberry_bush",
+        "properties": {
+          "age": "3"
+        }
+      }
+    },
+    "placement": []
+  }
+}

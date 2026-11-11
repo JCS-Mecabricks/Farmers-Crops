@@ -34,12 +34,12 @@ public class ModBlocks {
 
     public static final Block TOMATO_CROP = registerBlockWithoutBlockItem("tomato_crop",
             new TomatoCropBlock(BlockBehaviour.Properties.of().noCollision()
-                    .randomTicks().instabreak().sound(SoundType.CROP).pushReaction(PushReaction.DESTROY)
+                    .randomTicks().instabreak().sound(SoundType.CROP).pushReaction(PushReaction.POPPED)
                     .setId(ResourceKey.create(Registries.BLOCK, Identifier.fromNamespaceAndPath(CustomCrops.MOD_ID, "tomato_crop")))));
 
     public static final Block CORN_CROP = registerBlockWithoutBlockItem("corn_crop",
             new CornCropBlock(BlockBehaviour.Properties.of().noCollision()
-                    .randomTicks().instabreak().sound(SoundType.CROP).pushReaction(PushReaction.DESTROY)
+                    .randomTicks().instabreak().sound(SoundType.CROP).pushReaction(PushReaction.POPPED)
                     .setId(ResourceKey.create(Registries.BLOCK, Identifier.fromNamespaceAndPath(CustomCrops.MOD_ID, "corn_crop")))));
 
     public static final Block PASTRY_STATION = registerBlock("pastry_station", properties ->
